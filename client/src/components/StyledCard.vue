@@ -4,6 +4,8 @@
             <slot name="title"/>
         </v-card-title>
         <v-divider class="mx-3"/>
+
+        <slot/>
         <v-card-text class="text--primary pl-6">
             <slot name="card-text"/>
         </v-card-text>
