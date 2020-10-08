@@ -1,25 +1,53 @@
 package com.avatar.models.entities;
 
+import com.avatar.models.enums.EventStatus;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Data
 public class Event {
     @Id
     @GeneratedValue
-    private long Id;
+    private UUID id;
 
-    private String Name;
+    @Column(nullable = false)
+    private int organiserId;
 
-    private String ShortName;
+    @Column(nullable = false)
+    private String name;
 
-    private int TypeId;
+    private String shortName;
 
-    private int StatusId;
+    private String type;
 
-    private int MainLanguageId;
+    private String status;
+
+    private String mainLanguage;
+
+    private String activityType;
+
+    private String category;
+
+    private String publicity;
+
+    private String format;
+
+    @Column(nullable = false)
+    private Date dateTimeStart;
+
+    @Column(nullable = false)
+    private Date dateTimeFinish;
+
+    @Column(nullable = false)
+    private boolean isDateApproximate;
+
+    private String comment;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EventStatus eventStatus;
 }
