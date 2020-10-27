@@ -6,29 +6,38 @@
                     <template #title>
                         Редактирование
                     </template>
+                    <template #subtitle>
+                        Выезд в приют
+                    </template>
                     <template #card-text>
-                        <v-list class="pa-0">
+                        <v-list class="py-0 px-6">
                             <v-list-item to="/event/main">Основное</v-list-item>
-                            <v-list-item to="/event/characteristics" class="my-3">Характеристики</v-list-item>
-                            <v-list-item to="/event/preview" class="my-3">Анонс</v-list-item>
-                            <v-list-item to="/event/members" class="my-3">Участники</v-list-item>
-                            <v-list-item to="/event/location" class="my-3">Место проведения</v-list-item>
-                            <v-list-item to="/event/timetable" class="my-3">Расписание</v-list-item>
-                            <v-list-item to="/event/resume" class="text--disabled">Итоги</v-list-item>
+                            <v-list-item to="/event/characteristics" class="my-1">Характеристики</v-list-item>
+                            <v-list-item to="/event/preview" class="my-1">Анонс</v-list-item>
+                            <v-list-item to="/event/members" class="my-1">Участники</v-list-item>
+                            <v-list-item to="/event/location" class="my-1">Места проведения</v-list-item>
+                            <v-list-item to="/event/timetable" class="my-1">Расписание</v-list-item>
+                            <v-list-item to="/event/resume" class="text--disabled mt-1 mb-3">Итоги</v-list-item>
                         </v-list>
-                    </template>
-                </StyledCard>
-
-                <StyledCard class="mt-2">
-                    <template #title>
-                        Документы
-                    </template>
-                    <template #card-text>
-                        <v-list class="pa-0">
-                            <v-list-item to="/event/causeDocument">Документ-основание</v-list-item>
-                            <v-list-item to="/event/requests" class="my-3">Заявки</v-list-item>
+                        <v-divider class="mx-3"/>
+                        <v-list class="py-0 px-6">
+                            <v-list-item to="/event/causeDocument" class="mb-1 mt-3">Документ-основание</v-list-item>
+                            <v-list-item to="/event/requests" class="my-1">Заявки</v-list-item>
                             <v-list-item to="/event/decree">Приказ</v-list-item>
                         </v-list>
+                    </template>
+                    <template #buttons>
+                        <v-divider class="mx-3"/>
+                        <v-container class="">
+                            <v-col class="pa-0 ma-0" align="center" justify="center">
+                                <v-btn depressed block>
+                                    Сохранить все
+                                </v-btn>
+                                <v-btn class="mt-2" depressed block text>
+                                    Отправить в ИСУ
+                                </v-btn>
+                            </v-col>
+                        </v-container>
                     </template>
                 </StyledCard>
             </v-col>
@@ -57,25 +66,16 @@
     @import url("https://fonts.googleapis.com/css?family=Oswald");
 
     .v-divider {
-        border-color: rgba(197, 202, 233, 1) !important;
-        border-top-width: unset
-    }
-
-    .v-card__title {
-        font-family: "Oswald", Helvetica, Arial;
-        font-weight: 700;
-        font-size: 22px;
-        letter-spacing: 2px;
-        padding-bottom: 8px;
-        padding-left: 22px;
+        border-color: rgba(232, 234, 246, 1) !important;
+        border-top-width: 2px
     }
 
     .theme--light.v-list-item:not(.v-list-item--active),
     .v-list-item--link {
         min-height: 25px;
-        font-family: "Roboto";
-        font-size: 16px;
-        font-weight: 500;
+        /*font-family: "Roboto", serif;
+        font-size: 14px;
+        font-weight: 400;*/
         color: rgba(96, 96, 96, 1) !important;
         padding: 0;
     }
@@ -86,5 +86,13 @@
 
     .theme--light.v-list-item--active::before {
         opacity: 0;
+    }
+
+    .v-btn {
+        color: rgba(57, 73, 171, 1) !important;
+    }
+
+    .theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)  {
+        background-color: #E8EAF6 !important;
     }
 </style>

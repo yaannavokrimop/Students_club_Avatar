@@ -1,6 +1,5 @@
 <template>
     <v-navigation-drawer
-            :color="color"
             :mini-variant="true"
             mini-variant-width="65"
             app
@@ -14,7 +13,7 @@
 
             <v-divider/>
 
-            <v-list-item to="/event" class="my-2 " :ripple="false" >
+            <v-list-item class="my-2" :ripple="false">
                 <v-list-item-icon>
                     <v-icon color="white">mdi-plus</v-icon>
                 </v-list-item-icon>
@@ -28,9 +27,11 @@
 
             <v-divider/>
 
-            <v-list-item class="px-1">
+            <v-list-item to="/event" :ripple="false" class="my-2">
                 <v-list-item-icon>
-                    <v-icon color="white">mdi-calendar-edit</v-icon>
+<!--                    <v-badge overlap icon="mdi-close" color="error" @click="myclick">-->
+                        <v-icon color="white">mdi-calendar-edit</v-icon>
+<!--                    </v-badge>-->
                 </v-list-item-icon>
             </v-list-item>
 
@@ -42,19 +43,29 @@
     export default {
         name: "SideBar",
         data: () => ({
-            color: '#3949AB',
-        })
+
+        }),
     }
 </script>
 
 <style scoped>
+    .v-navigation-drawer {
+        background-color: rgba(121, 134, 203, 1) !important;
+    }
+
+    ::v-deep .v-navigation-drawer__border {
+        display: none;
+    }
+
     .v-icon {
         font-size: 30px !important;
     }
+
     .v-divider {
         border-color: rgba(255, 255, 255, 0.32) !important;
-        border-top-width: medium
+        border-top-width: 3px
     }
+
     .v-list-item__icon {
         margin: 9px 0;
     }
