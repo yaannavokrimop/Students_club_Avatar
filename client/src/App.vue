@@ -1,10 +1,10 @@
 <template>
     <v-app>
         <!--<div id="nav">
-          <router-link to="/">Home</router-link> |
-          <router-link to="/about">About</router-link>
+          <storeModules-link to="/">Home</storeModules-link> |
+          <storeModules-link to="/about">About</storeModules-link>
         </div>
-        <router-view/>-->
+        <storeModules-view/>-->
 
         <SideBar/>
         <v-main class="main-style">
@@ -28,6 +28,6 @@
 
 <style lang="scss" scoped>
     .main-style {
-        background: rgba(197, 202, 233, 1);
+        background-color: rgba(232, 234, 246, 1);
     }
 </style>

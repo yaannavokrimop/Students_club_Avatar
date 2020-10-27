@@ -2,22 +2,46 @@
     <v-card class="rounded-lg">
         <v-card-title>
             <slot name="title"/>
+            <v-spacer/>
+            <v-btn icon size="10" v-if="closable" @click="close">
+                <v-icon>mdi-close</v-icon>
+            </v-btn>
         </v-card-title>
+
         <v-divider class="mx-3"/>
 
-        <slot/>
-        <v-card-text class="text--primary pl-6">
-            <slot name="card-text"/>
+        <v-card-text v-if="hasSubtitle" class="subtitle px-6">
+            <slot name="subtitle"/>
         </v-card-text>
+
+        <v-divider class="mx-3" v-if="hasSubtitle"/>
+
+        <v-card-text class="text--primary px-0">
+            <slot name="card-text"/>
+
+        </v-card-text>
+
+        <slot name="buttons"/>
+
+
     </v-card>
 </template>
 
 <script>
     export default {
         name: "StyledCard",
-        props: ['title'],
+        props: {
+            title: String,
+            closable: Boolean,
+            close: Function
+        },
         data: () => ({
-        })
+        }),
+        computed: {
+            hasSubtitle(){
+                return !!this.$slots.subtitle
+            },
+        },
     }
 </script>
 
@@ -25,9 +49,9 @@
     @import url("https://fonts.googleapis.com/css?family=Oswald");
 
     .v-divider {
-        border-color: rgba(197, 202, 233, 1) !important;
-        border-top-width: unset
-    }
+         border-color: rgba(232, 234, 246, 1) !important;
+         border-top-width: 2px
+     }
 
     .v-card__title {
         font-family: "Oswald", Helvetica, Arial;
@@ -38,6 +62,13 @@
         padding-left: 22px;
     }
 
+    .subtitle {
+        /*font-family: "Roboto";*/
+        font-size: 14px;
+        font-weight: 400;
+        color: black !important;
+    }
+
     .theme--light.v-list-item:not(.v-list-item--active) {
         min-height: 25px;
         font-family: "Roboto";
@@ -45,6 +76,11 @@
         font-weight: 500;
         color: rgba(96, 96, 96, 1) !important;
         padding: 0;
+    }
+
+    .v-btn--icon {
+        height: 30px;
+        width: 30px;
     }
 
 </style>
