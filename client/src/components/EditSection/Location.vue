@@ -1,12 +1,12 @@
 <template>
     <v-row>
-        <v-col class="pt-0">
+        <v-col class="pa-0">
             <StyledCard>
                 <template #title>
                     Места проведения
                 </template>
                 <template #card-text>
-                    <v-sheet height="450">
+                    <v-sheet height="500">
                         <v-calendar ref="calendar"
                                     v-model="focus"
                                     color="primary"
@@ -18,6 +18,7 @@
                                     locale="ru"
                                     :firstInterval="firstInterval"
                                     :intervalCount="24 - firstInterval"
+                                    flat depressed
                         >
                         </v-calendar>
                     </v-sheet>
@@ -162,5 +163,7 @@
 </script>
 
 <style scoped>
-
+    .theme--light.v-calendar-daily {
+        border: none
+    }
 </style>

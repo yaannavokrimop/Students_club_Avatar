@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col class="pt-0">
+        <v-col class="pa-0">
             <StyledCard>
                 <template #title>
                     Анонс
@@ -60,15 +60,15 @@
                 </template>
             </StyledCard>
         </v-col>
-        <v-col class="pt-0" cols="4">
-            <StyledCard closable>
+        <v-col class="pa-0" cols="4">
+            <StyledCard closable :color="color">
                 <template #title>
                     Подсказки
                 </template>
                 <template #card-text>
                     <v-expansion-panels accordion flat>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Краткое описание</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Краткое описание</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 <div>
                                     Полное название включает как творческое имя в кавычках ("День донора"), так и
@@ -82,35 +82,35 @@
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Описание</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Описание</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Цель</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Цель</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Задачи</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Задачи</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Сайт</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Сайт</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Комментарий</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Комментарий</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
@@ -136,7 +136,8 @@
                 tasks: '',
                 site: '',
                 comment: ''
-            }
+            },
+            color: 'rgba(246, 246, 246, 1)'
         })
     }
 </script>

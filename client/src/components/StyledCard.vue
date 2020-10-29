@@ -1,5 +1,5 @@
 <template>
-    <v-card class="rounded-lg">
+    <v-card flat tile :color="color" height="100%">
         <v-card-title>
             <slot name="title"/>
             <v-spacer/>
@@ -33,7 +33,8 @@
         props: {
             title: String,
             closable: Boolean,
-            close: Function
+            close: Function,
+            color: String
         },
         data: () => ({
         }),
@@ -74,7 +75,7 @@
         font-family: "Roboto";
         font-size: 16px;
         font-weight: 500;
-        color: rgba(96, 96, 96, 1) !important;
+        /* color: rgba(96, 96, 96, 1) !important; */
         padding: 0;
     }
 

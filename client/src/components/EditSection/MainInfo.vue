@@ -1,6 +1,6 @@
 <template>
-    <v-row>
-        <v-col class="pt-0">
+    <v-row class="pa-0">
+        <v-col class="pa-0">
             <StyledCard>
                 <template #title>
                     Основное
@@ -84,7 +84,7 @@
                                     offset-y
                                     min-width="290px"
                             >
-                                <template v-slot:activator="{ on, attrs }">
+                                <template v-slot:activator="{ on1, attrs }">
                                     <v-text-field
                                             v-model="mainInfo.dateTo"
                                             placeholder="Окончание"
@@ -92,7 +92,7 @@
                                             outlined
                                             dense
                                             v-bind="attrs"
-                                            v-on="on"
+                                            v-on="on1"
                                     ></v-text-field>
                                 </template>
                                 <v-date-picker
@@ -122,15 +122,15 @@
                 </template>
             </StyledCard>
         </v-col>
-        <v-col class="pt-0" cols="4" v-if="showHelp">
-            <StyledCard closable :close="toggleHelp" >
+        <v-col class="pa-0" cols="4" v-if="showHelp">
+            <StyledCard closable :close="toggleHelp" :color="color">
                 <template #title>
                     Подсказки
                 </template>
                 <template #card-text>
                     <v-expansion-panels accordion flat>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Название</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Название</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 <div>
                                     Полное название включает как творческое имя в кавычках ("День донора"), так и
@@ -144,21 +144,21 @@
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Краткое название</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Краткое название</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Примерные сроки</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Примерные сроки</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header>Даты проведения</v-expansion-panel-header>
+                            <v-expansion-panel-header :color="color">Даты проведения</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
@@ -209,7 +209,8 @@
                 dateTo: ''
             },
             menu: false,
-            showHelp: true
+            showHelp: true,
+            color: 'rgba(246, 246, 246, 1)'
         }),
         methods: {
             toggleHelp() {
@@ -237,4 +238,8 @@
     button, input, select, textarea, .v-input {
         font-size: 14px;
     }
+
+    /* .row {
+        height: 100%
+    } */
 </style>
