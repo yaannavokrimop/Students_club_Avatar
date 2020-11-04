@@ -13,22 +13,30 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/event")
+@RequestMapping("/api/event")
 @AllArgsConstructor
+@CrossOrigin
 public class EventController {
     private final EventService eventService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UUID> createEvent(@RequestBody Event event) {
         UUID eventId = eventService.create(event);
         return ResponseEntity.ok(eventId);
     }
 
-    @PostMapping("/list")
+    @GetMapping("/all")
+    public ResponseEntity<List<EventDto>> getAllEvent() {
+        Page<Event> events = eventService.getPageOfEvents(null);
+        List<EventDto> eventDtoList = eventService.transformToEventDtoList(events.getContent());
+        return ResponseEntity.ok(eventDtoList);
+    }
+
+    @PostMapping("/search")
     public ResponseEntity<List<EventDto>> getEventList(@RequestBody SearchParam params) {
         Page<Event> eventPage = eventService.getPageOfEvents(params);
         List<EventDto> eventDtoList= eventService.transformToEventDtoList(eventPage.getContent());
-        return ResponseEntity.ok(eventDtoList);
+        return ResponseEntity.ok().body(eventDtoList);
     }
 
     @PutMapping("/main/{id}")

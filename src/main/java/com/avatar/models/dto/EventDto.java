@@ -12,7 +12,7 @@ import java.util.UUID;
 public class EventDto {
     UUID id;
     String name;
-    Date dateTimeStart;
-    Date dateTimeFinish;
+    Date dateFrom;
+    Date dateTo;
     EventStatus status;
 }

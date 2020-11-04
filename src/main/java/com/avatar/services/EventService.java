@@ -37,6 +37,9 @@ public class EventService {
 
     public Page<Event> getPageOfEvents(SearchParam params) {
         List<EventStatus> eventStatuses;
+        if (params == null) {
+            return eventRepo.findAll(Pageable.unpaged());
+        }
         if (CollectionUtils.isEmpty(params.getStatusList())) {
             eventStatuses = null;
         } else {
