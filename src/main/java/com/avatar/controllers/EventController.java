@@ -23,7 +23,7 @@ public class EventController {
     @PostMapping("/create")
     public ResponseEntity<UUID> createEvent(@RequestBody EventDto eventDto) {
         UUID eventId = eventService.create(eventDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventId);
+        return ResponseEntity.ok(eventId);
     }
 
     @GetMapping("/all")

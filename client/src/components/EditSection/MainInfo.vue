@@ -5,7 +5,7 @@
                 <template #title>
                     Основное
                 </template>
-                <template #card-text>
+                <template #card-text class="pb-0">
                     <v-row class="px-5">
                         <v-col cols="4" class="py-0"><span>Название</span></v-col>
                         <v-col class="py-0">
@@ -48,7 +48,7 @@
                         <v-col cols="4" class="py-0"><span>Начало</span></v-col>
                         <v-col cols="4" class="py-0">
                             <v-menu
-                                    v-model="menu"
+                                    v-model="menuDateFrom"
                                     :close-on-content-click="false"
                                     :nudge-right="40"
                                     transition="scale-transition"
@@ -68,36 +68,7 @@
                                 </template>
                                 <v-date-picker
                                         v-model="mainInfo.dateFrom"
-                                        @input="menu = false"
-                                ></v-date-picker>
-                            </v-menu>
-                        </v-col>
-                    </v-row>
-                    <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Окончание</span></v-col>
-                        <v-col cols="4" class="py-0">
-                            <v-menu
-                                    v-model="menu"
-                                    :close-on-content-click="false"
-                                    :nudge-right="40"
-                                    transition="scale-transition"
-                                    offset-y
-                                    min-width="290px"
-                            >
-                                <template v-slot:activator="{ on1, attrs }">
-                                    <v-text-field
-                                            v-model="mainInfo.dateTo"
-                                            placeholder="Окончание"
-                                            readonly
-                                            outlined
-                                            dense
-                                            v-bind="attrs"
-                                            v-on="on1"
-                                    ></v-text-field>
-                                </template>
-                                <v-date-picker
-                                        v-model="mainInfo.dateTo"
-                                        @input="menu = false"
+                                        @input="menuDateFrom = false"
                                 ></v-date-picker>
                             </v-menu>
                         </v-col>
@@ -105,6 +76,45 @@
                             <v-text-field
                                     outlined
                                     dense
+                                    v-model="mainInfo.timeFrom"
+                                    placeholder="Время"
+                                    type="time"
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row class="px-5">
+                        <v-col cols="4" class="py-0"><span>Окончание</span></v-col>
+                        <v-col cols="4" class="py-0">
+                            <v-menu
+                                    v-model="menuDateTo"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    transition="scale-transition"
+                                    offset-y
+                                    min-width="290px"
+                            >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field
+                                            v-model="mainInfo.dateTo"
+                                            placeholder="Окончание"
+                                            readonly
+                                            outlined
+                                            dense
+                                            v-bind="attrs"
+                                            v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-date-picker
+                                        v-model="mainInfo.dateTo"
+                                        @input="menuDateTo = false"
+                                ></v-date-picker>
+                            </v-menu>
+                        </v-col>
+                        <v-col cols="4" class="py-0">
+                            <v-text-field
+                                    outlined
+                                    dense
+                                    v-model="mainInfo.timeTo"
                                     placeholder="Время"
                                     type="time"
                             ></v-text-field>
@@ -114,7 +124,7 @@
                 <template #buttons>
                     <v-container class="pt-0">
                         <v-row class="px-5" justify="end">
-                            <v-btn depressed>
+                            <v-btn depressed @click="saveMainInfo">
                                 Сохранить
                             </v-btn>
                         </v-row>
@@ -122,7 +132,7 @@
                 </template>
             </StyledCard>
         </v-col>
-        <v-col class="pa-0" cols="4" v-if="showHelp">
+        <v-col class="pa-0 mr-2" cols="4" v-if="showHelp">
             <StyledCard closable :close="toggleHelp" :color="color">
                 <template #title>
                     Подсказки
@@ -192,6 +202,7 @@
 </template>
 
 <script>
+    import { mapActions } from "vuex";
     import StyledCard from "../StyledCard";
     //import Help from "../Help";
 
@@ -206,15 +217,22 @@
                 type: '',
                 typeOfActivity: '',
                 dateFrom: '',
-                dateTo: ''
+                dateTo: '',
+                timeFrom: '',
+                timeTo: ''
             },
-            menu: false,
+            menuDateFrom: false,
+            menuDateTo: false,
             showHelp: true,
             color: 'rgba(246, 246, 246, 1)'
         }),
         methods: {
+            ...mapActions(['createEvent']),
             toggleHelp() {
                 this.showHelp = !this.showHelp
+            },
+            saveMainInfo(){
+                this.createEvent({name: this.mainInfo.name, dateFrom: this.mainInfo.dateFrom, dateTo: this.mainInfo.dateTo});
             }
         }
     }

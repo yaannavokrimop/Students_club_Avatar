@@ -54,11 +54,11 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Characteristic> characteristics;
+    /*@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Characteristic> characteristics;*/
 
-    @OneToOne(mappedBy = "event", orphanRemoval = true)
-    private Preview preview;
+    /*@OneToOne(mappedBy = "event", orphanRemoval = true)
+    private Preview preview;*/
 
     public Event(String name, Date dateFrom, Date dateTo) {
         this.name = name;

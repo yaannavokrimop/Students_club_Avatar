@@ -18,7 +18,6 @@
 
         <v-card-text class="text--primary px-0">
             <slot name="card-text"/>
-
         </v-card-text>
 
         <slot name="buttons"/>

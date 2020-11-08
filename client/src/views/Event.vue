@@ -103,7 +103,7 @@
         height: 100%
     }
 
-    .theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)  {
+    /* .theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)  { */
         /* background-color: #E8EAF6 !important; */
-    }
+    /* } */
 </style>

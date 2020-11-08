@@ -1,8 +1,6 @@
--- create database avatar;
--- create user test_usr with password '123';
--- grant all on database avatar to test_usr;
+CREATE SCHEMA avatar AUTHORIZATION postgres;
 
-create table Event (
+create table avatar.Event (
     id uuid primary key,
     organiser_id integer not null,
     name varchar(255) not null,
