@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,9 +27,20 @@ public class EventService {
         return eventRepo.save(event).getId();
     }
 
-    public Event updateEvent(Event inputEvent, UUID eventId) {
+    public EventDto getEventMainInfoById(UUID eventID) {
+        Event event = eventRepo.findById(eventID).orElseThrow(NullPointerException::new);
+        EventDto eventDto = transformToEventDto(event);
+        eventDto.setShortName(event.getShortName());
+        eventDto.setStatus(event.getStatus());
+        eventDto.setType(event.getType());
+        eventDto.setTypeOfActivity(event.getActivityType());
+        return eventDto;
+    }
+
+    public Event updateEventMainInfo(EventDto eventDto, UUID eventId) {
         Event dbEvent = eventRepo.findById(eventId).orElseThrow(NullPointerException::new);
-        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus");
+        Event inputEvent = transformToEvent(eventDto);
+        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preRelease");
         return eventRepo.save(dbEvent);
     }
 
@@ -71,6 +80,18 @@ public class EventService {
     }
 
     public EventDto transformToEventDto(Event event) {
-        return new EventDto(event.getId(), event.getName(), event.getDateTimeStart(), event.getDateTimeFinish(), event.getEventStatus());
+        EventDto eventDto = new EventDto(event.getName(), event.getDateTimeStart(), event.getDateTimeFinish());
+        eventDto.setId(event.getId());
+        eventDto.setEventStatus(event.getEventStatus());
+        return eventDto;
+    }
+
+    public Event transformToEvent(EventDto eventDto) {
+        Event event = new Event(eventDto.getName(), eventDto.getDateFrom(), eventDto.getDateTo());
+        event.setShortName(eventDto.getShortName());
+        event.setStatus(eventDto.getStatus());
+        event.setType(eventDto.getType());
+        event.setActivityType(eventDto.getTypeOfActivity());
+        return event;
     }
 }

@@ -6,6 +6,7 @@ import com.avatar.models.entities.Event;
 import com.avatar.services.EventService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class EventController {
     @PostMapping("/create")
     public ResponseEntity<UUID> createEvent(@RequestBody Event event) {
         UUID eventId = eventService.create(event);
-        return ResponseEntity.ok(eventId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventId);
     }
 
     @GetMapping("/all")
@@ -32,20 +33,30 @@ public class EventController {
         return ResponseEntity.ok(eventDtoList);
     }
 
+    @GetMapping("/mainInfo/{id}")
+    public ResponseEntity getEventMainInfo(@PathVariable("id") UUID eventId) {
+        try {
+            EventDto eventDto = eventService.getEventMainInfoById(eventId);
+            return ResponseEntity.ok(eventDto);
+        } catch (NullPointerException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Мероприятие не найдено.");
+        }
+    }
+
     @PostMapping("/search")
     public ResponseEntity<List<EventDto>> getEventList(@RequestBody SearchParam params) {
         Page<Event> eventPage = eventService.getPageOfEvents(params);
         List<EventDto> eventDtoList= eventService.transformToEventDtoList(eventPage.getContent());
-        return ResponseEntity.ok().body(eventDtoList);
+        return ResponseEntity.ok(eventDtoList);
     }
 
-    @PutMapping("/main/{id}")
-    public ResponseEntity<String> updateEventMainInfo (@RequestBody Event inputEvent, @PathVariable("id") UUID eventId) {
+    @PutMapping("/mainInfo/{id}")
+    public ResponseEntity<String> updateEventMainInfo (@RequestBody EventDto inputEvent, @PathVariable("id") UUID eventId) {
         try {
-            eventService.updateEvent(inputEvent, eventId);
+            eventService.updateEventMainInfo(inputEvent, eventId);
             return ResponseEntity.ok("Изменения сохранены успешно.");
         } catch (NullPointerException ex) {
-            return ResponseEntity.badRequest().body("Указан неверный Id мероприятия.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Указан неверный Id мероприятия. Мероприятие не найдено.");
         }
     }
 }

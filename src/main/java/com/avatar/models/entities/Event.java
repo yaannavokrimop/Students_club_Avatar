@@ -2,13 +2,16 @@ package com.avatar.models.entities;
 
 import com.avatar.models.enums.EventStatus;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Event {
     @Id
     @GeneratedValue
@@ -50,4 +53,16 @@ public class Event {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Characteristic> characteristics;
+
+    @OneToOne(mappedBy = "event", orphanRemoval = true)
+    private Preview preview;
+
+    public Event(String name, Date dateFrom, Date dateTo) {
+        this.name = name;
+        this.dateTimeStart = dateFrom;
+        this.dateTimeFinish = dateTo;
+    }
 }
