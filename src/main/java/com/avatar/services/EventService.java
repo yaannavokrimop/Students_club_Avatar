@@ -22,8 +22,13 @@ import java.util.UUID;
 public class EventService {
     private final EventRepo eventRepo;
 
-    public UUID create(Event event) {
+    public UUID create(EventDto eventDto) {
+        Event event = new Event();
         event.setEventStatus(EventStatus.DRAFT);
+        event.setName(eventDto.getName());
+        event.setDateTimeStart(eventDto.getDateFrom());
+        event.setDateTimeFinish(eventDto.getDateTo());
+        event.setDateApproximate(eventDto.isDateFlag());
         return eventRepo.save(event).getId();
     }
 
@@ -80,7 +85,7 @@ public class EventService {
     }
 
     public EventDto transformToEventDto(Event event) {
-        EventDto eventDto = new EventDto(event.getName(), event.getDateTimeStart(), event.getDateTimeFinish());
+        EventDto eventDto = new EventDto(event.getName(), event.getDateTimeStart(), event.getDateTimeFinish(), event.isDateApproximate());
         eventDto.setId(event.getId());
         eventDto.setEventStatus(event.getEventStatus());
         return eventDto;

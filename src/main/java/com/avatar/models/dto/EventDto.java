@@ -20,9 +20,10 @@ public class EventDto {
     private String typeOfActivity;
     private Date dateFrom;
     private Date dateTo;
+    private boolean dateFlag;
     private EventStatus eventStatus;
 
-    public EventDto(String name, Date dateTimeStart, Date dateTimeFinish) {
+    public EventDto(String name, Date dateTimeStart, Date dateTimeFinish, boolean dateFlag) {
         this.name = name;
         this.dateFrom = dateTimeStart;
         this.dateTo = dateTimeFinish;
