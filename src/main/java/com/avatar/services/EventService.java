@@ -4,6 +4,7 @@ import com.avatar.models.bean.SearchParam;
 import com.avatar.models.dto.EventDto;
 import com.avatar.models.entities.Event;
 import com.avatar.models.enums.EventStatus;
+import com.avatar.models.mappers.EventMapper;
 import com.avatar.repositories.EventRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -34,11 +35,12 @@ public class EventService {
 
     public EventDto getEventMainInfoById(UUID eventID) {
         Event event = eventRepo.findById(eventID).orElseThrow(NullPointerException::new);
-        EventDto eventDto = transformToEventDto(event);
-        eventDto.setShortName(event.getShortName());
-        eventDto.setStatus(event.getStatus());
-        eventDto.setType(event.getType());
-        eventDto.setTypeOfActivity(event.getActivityType());
+        EventDto eventDto = EventMapper.INSTANCE.EventToEventDto(event);
+//        EventDto eventDto = transformToEventDto(event);
+//        eventDto.setShortName(event.getShortName());
+//        eventDto.setStatus(event.getStatus());
+//        eventDto.setType(event.getType());
+//        eventDto.setTypeOfActivity(event.getActivityType());
         return eventDto;
     }
 
@@ -80,16 +82,16 @@ public class EventService {
 
     public List<EventDto> transformToEventDtoList(List<Event> eventList) {
         List<EventDto> eventDtoList = new ArrayList<>();
-        eventList.forEach(event -> eventDtoList.add(transformToEventDto(event)));
+        eventList.forEach(event -> eventDtoList.add(EventMapper.INSTANCE.EventToEventDto(event)));
         return eventDtoList;
     }
 
-    public EventDto transformToEventDto(Event event) {
-        EventDto eventDto = new EventDto(event.getName(), event.getDateTimeStart(), event.getDateTimeFinish(), event.isDateApproximate());
-        eventDto.setId(event.getId());
-        eventDto.setEventStatus(event.getEventStatus());
-        return eventDto;
-    }
+//    public EventDto transformToEventDto(Event event) {
+//        EventDto eventDto = new EventDto(event.getName(), event.getDateTimeStart(), event.getDateTimeFinish(), event.isDateApproximate());
+//        eventDto.setId(event.getId());
+//        eventDto.setEventStatus(event.getEventStatus());
+//        return eventDto;
+//    }
 
     public Event transformToEvent(EventDto eventDto) {
         Event event = new Event(eventDto.getName(), eventDto.getDateFrom(), eventDto.getDateTo());

@@ -16,7 +16,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/event")
 @AllArgsConstructor
-@CrossOrigin
 public class EventController {
     private final EventService eventService;
 

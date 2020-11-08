@@ -13,7 +13,7 @@ const mutations = {
 const actions = {
     createEvent({ commit }, { name, dateFrom, dateTo, dateFlag = false }) {
         HTTP
-            .post('/create', { name, dateFrom, dateTo, dateFlag })
+            .post('/event/create', { name, dateFrom, dateTo, dateFlag })
             .then((response) => {
                 console.log('Event created successfully');
                 commit("SET_ID", response.data);
