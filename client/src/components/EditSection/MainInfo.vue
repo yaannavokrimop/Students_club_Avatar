@@ -5,47 +5,47 @@
                 <template #title>
                     Основное
                 </template>
-                <template #card-text class="pb-0">
+                <template #card-text>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Название</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Название</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="mainInfo.name" placeholder="Название" rows="2" dense
+                            <v-textarea v-model="mainInfo.name" placeholder="Название" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Краткое название</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Краткое название</span></v-col>
                         <v-col class="py-0">
-                            <v-text-field :v-model="mainInfo.shortName" placeholder="Краткое название" dense
+                            <v-text-field v-model="mainInfo.shortName" placeholder="Краткое название" dense
                                           outlined></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Статус</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Статус</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete :v-model="mainInfo.status"
+                            <v-autocomplete v-model="mainInfo.status"
                                             :items="['Ведомственный', 'Всероссийский', 'Городской', 'Групповой', 'Кафедральный', 'Межвузовский', 'Международный', 'Общественный']"
                                             placeholder="Статус" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Тип</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Тип</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete :v-model="mainInfo.type"
+                            <v-autocomplete v-model="mainInfo.type"
                                             :items="['Акция', 'Вебинар', 'Вечер', 'Дебаты', 'Заседание', 'Игра', 'Митап', 'Семинар']"
                                             placeholder="Тип" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Вид деятельности</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Вид деятельности</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete :v-model="mainInfo.typeOfActivity"
+                            <v-autocomplete v-model="mainInfo.typeOfActivity"
                                             :items="['Бизнес', 'Внеучебная', 'Карьера', 'Международная', 'Наука и инновации', 'Образование', 'Проектная', 'Социальная']"
                                             placeholder="Вид деятельности" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Начало</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Начало</span></v-col>
                         <v-col cols="4" class="py-0">
                             <v-menu
                                     v-model="menuDateFrom"
@@ -83,7 +83,7 @@
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Окончание</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Окончание</span></v-col>
                         <v-col cols="4" class="py-0">
                             <v-menu
                                     v-model="menuDateTo"
@@ -251,10 +251,6 @@
     .v-btn {
         background-color: #3949AB !important;
         color: white
-    }
-
-    button, input, select, textarea, .v-input {
-        font-size: 14px;
     }
 
     /* .row {

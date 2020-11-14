@@ -15,7 +15,7 @@
 
             <v-list-item class="my-2" :ripple="false">
                 <v-list-item-icon>
-                    <v-icon color="white">mdi-plus</v-icon>
+                    <CreateEventDialog/>
                 </v-list-item-icon>
             </v-list-item>
 
@@ -40,11 +40,13 @@
 </template>
 
 <script>
+    import CreateEventDialog from "./CreateEventDialog";
     export default {
         name: "SideBar",
         data: () => ({
 
         }),
+        components: { CreateEventDialog }
     }
 </script>
 

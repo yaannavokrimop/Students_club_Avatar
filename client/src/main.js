@@ -6,6 +6,8 @@ import { VueMaskDirective } from 'v-mask'
 
 import router from './router'
 
+import './assets/global.css'
+
 Vue.config.productionTip = false;
 Vue.directive('mask', VueMaskDirective);
 
