@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\client\\src",
+    "\\client\\src\\components",
+    "\\client\\src\\storeModules",
+    "\\client\\src\\views",
+    "\\gradle"
+  ],
+  "SelectedNode": "\\client\\src\\views\\Event.vue",
+  "PreviewInSolutionExplorer": false
+}

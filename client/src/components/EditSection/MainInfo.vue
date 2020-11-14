@@ -21,6 +21,66 @@
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
+                        <v-col cols="4" class="py-0"><span>Начало</span></v-col>
+                        <v-col cols="4" class="py-0">
+                            <v-menu v-model="menuDateFrom"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    transition="scale-transition"
+                                    offset-y
+                                    min-width="290px">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field v-model="mainInfo.dateFrom"
+                                                  placeholder="Начало"
+                                                  readonly
+                                                  outlined
+                                                  dense
+                                                  v-bind="attrs"
+                                                  v-on="on"></v-text-field>
+                                </template>
+                                <v-date-picker v-model="mainInfo.dateFrom"
+                                               @input="menuDateFrom = false"></v-date-picker>
+                            </v-menu>
+                        </v-col>
+                        <v-col cols="4" class="py-0">
+                            <v-text-field outlined
+                                          dense
+                                          v-model="mainInfo.timeFrom"
+                                          placeholder="Время"
+                                          type="time"></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row class="px-5">
+                        <v-col cols="4" class="py-0"><span>Окончание</span></v-col>
+                        <v-col cols="4" class="py-0">
+                            <v-menu v-model="menuDateTo"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    transition="scale-transition"
+                                    offset-y
+                                    min-width="290px">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field v-model="mainInfo.dateTo"
+                                                  placeholder="Окончание"
+                                                  readonly
+                                                  outlined
+                                                  dense
+                                                  v-bind="attrs"
+                                                  v-on="on"></v-text-field>
+                                </template>
+                                <v-date-picker v-model="mainInfo.dateTo"
+                                               @input="menuDateTo = false"></v-date-picker>
+                            </v-menu>
+                        </v-col>
+                        <v-col cols="4" class="py-0">
+                            <v-text-field outlined
+                                          dense
+                                          v-model="mainInfo.timeTo"
+                                          placeholder="Время"
+                                          type="time"></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row class="px-5">
                         <v-col cols="4" class="py-0"><span>Статус</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete :v-model="mainInfo.status"
@@ -42,82 +102,6 @@
                             <v-autocomplete :v-model="mainInfo.typeOfActivity"
                                             :items="['Бизнес', 'Внеучебная', 'Карьера', 'Международная', 'Наука и инновации', 'Образование', 'Проектная', 'Социальная']"
                                             placeholder="Вид деятельности" dense outlined></v-autocomplete>
-                        </v-col>
-                    </v-row>
-                    <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Начало</span></v-col>
-                        <v-col cols="4" class="py-0">
-                            <v-menu
-                                    v-model="menuDateFrom"
-                                    :close-on-content-click="false"
-                                    :nudge-right="40"
-                                    transition="scale-transition"
-                                    offset-y
-                                    min-width="290px"
-                            >
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field
-                                            v-model="mainInfo.dateFrom"
-                                            placeholder="Начало"
-                                            readonly
-                                            outlined
-                                            dense
-                                            v-bind="attrs"
-                                            v-on="on"
-                                    ></v-text-field>
-                                </template>
-                                <v-date-picker
-                                        v-model="mainInfo.dateFrom"
-                                        @input="menuDateFrom = false"
-                                ></v-date-picker>
-                            </v-menu>
-                        </v-col>
-                        <v-col cols="4" class="py-0">
-                            <v-text-field
-                                    outlined
-                                    dense
-                                    v-model="mainInfo.timeFrom"
-                                    placeholder="Время"
-                                    type="time"
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Окончание</span></v-col>
-                        <v-col cols="4" class="py-0">
-                            <v-menu
-                                    v-model="menuDateTo"
-                                    :close-on-content-click="false"
-                                    :nudge-right="40"
-                                    transition="scale-transition"
-                                    offset-y
-                                    min-width="290px"
-                            >
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field
-                                            v-model="mainInfo.dateTo"
-                                            placeholder="Окончание"
-                                            readonly
-                                            outlined
-                                            dense
-                                            v-bind="attrs"
-                                            v-on="on"
-                                    ></v-text-field>
-                                </template>
-                                <v-date-picker
-                                        v-model="mainInfo.dateTo"
-                                        @input="menuDateTo = false"
-                                ></v-date-picker>
-                            </v-menu>
-                        </v-col>
-                        <v-col cols="4" class="py-0">
-                            <v-text-field
-                                    outlined
-                                    dense
-                                    v-model="mainInfo.timeTo"
-                                    placeholder="Время"
-                                    type="time"
-                            ></v-text-field>
                         </v-col>
                     </v-row>
                 </template>
@@ -177,8 +161,6 @@
                     </v-expansion-panels>
                 </template>
             </StyledCard>
-
-
         </v-col>
         <v-fab-transition>
             <v-tooltip bottom>
