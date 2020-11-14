@@ -10,20 +10,24 @@
                         Выезд в приют
                     </template>
                     <template #card-text>
-                        <v-list class="py-0 px-6" :color="color">
-                            <v-list-item to="/event/main">Основное</v-list-item>
-                            <v-list-item to="/event/characteristics" class="my-1">Характеристики</v-list-item>
-                            <v-list-item to="/event/preview" class="my-1">Анонс</v-list-item>
-                            <v-list-item to="/event/members" class="my-1">Участники</v-list-item>
-                            <v-list-item to="/event/location" class="my-1">Места проведения</v-list-item>
-                            <v-list-item to="/event/timetable" class="my-1">Расписание</v-list-item>
-                            <v-list-item to="/event/resume" class="text--disabled mt-1 mb-3">Итоги</v-list-item>
-                        </v-list>
-                        <v-divider class="mx-3"/>
-                        <v-list class="py-0 px-6" :color="color">
-                            <v-list-item to="/event/causeDocument" class="mb-1 mt-3">Документ-основание</v-list-item>
-                            <v-list-item to="/event/requests" class="my-1">Заявки</v-list-item>
-                            <v-list-item to="/event/decree">Приказ</v-list-item>
+                        <v-list :color="color" dense>
+                                <v-list-item to="/event/main">
+                                    <v-list-item-content>Основное</v-list-item-content>
+                                </v-list-item>
+                                <v-list-item to="/event/characteristics">Характеристики</v-list-item>
+                                <v-list-item to="/event/preview">Анонс</v-list-item>
+                                <v-list-item to="/event/members">Участники</v-list-item>
+                                <v-list-item to="/event/members">
+                                    <v-list-group :value="true">
+                                        <template v-slot:activator>
+                                            <v-list-item to="/event/location">Места проведения</v-list-item>
+                                        </template>
+                                        <v-list-item >в итмо</v-list-item>
+                                        <v-list-item >вне итмо</v-list-item>
+                                    </v-list-group>
+                                </v-list-item>
+                                <v-list-item to="/event/resume" class="text--disabled">Итоги</v-list-item>
+                                <v-list-item to="/event/requests" >Заявки</v-list-item>
                         </v-list>
                     </template>
                     <template #buttons>
@@ -78,7 +82,7 @@
     }
 
     .theme--light.v-list-item:not(.v-list-item--active),
-    .v-list-item--link {
+    .v-list-item--link, .v-list-item {
         min-height: 25px;
         /*font-family: "Roboto", serif;
         font-size: 14px;
