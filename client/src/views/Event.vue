@@ -10,34 +10,24 @@
                         Выезд в приют
                     </template>
                     <template #card-text>
-                        <v-list :color="color" dense>
-                                <v-list-item to="/event/main">
-                                    <v-list-item-content>Основное</v-list-item-content>
-                                </v-list-item>
-                                <v-list-item to="/event/characteristics">Характеристики</v-list-item>
-                                <v-list-item to="/event/preview">Анонс</v-list-item>
-                                <v-list-item to="/event/members">Участники</v-list-item>
-                                <v-list-item to="/event/members">
-                                    <v-list-group :value="true">
-                                        <template v-slot:activator>
-                                            <v-list-item to="/event/location">Места проведения</v-list-item>
-                                        </template>
-                                        <v-list-item >в итмо</v-list-item>
-                                        <v-list-item >вне итмо</v-list-item>
-                                    </v-list-group>
-                                </v-list-item>
-                                <v-list-item to="/event/resume" class="text--disabled">Итоги</v-list-item>
-                                <v-list-item to="/event/requests" >Заявки</v-list-item>
+                        <v-list class="py-0" :color="color" dense>
+                            <v-list-item to="/event/main" class="my-1 px-6">Основное</v-list-item>
+                            <v-list-item to="/event/characteristics" class="my-1 px-6">Характеристики</v-list-item>
+                            <v-list-item to="/event/preview" class="my-1 px-6">Анонс</v-list-item>
+                            <v-list-item to="/event/members" class="my-1 px-6">Участники</v-list-item>
+                            <v-list-item to="/event/location" class="my-1 px-6">Места проведения</v-list-item>
+                            <v-list-item to="/event/requests" class="my-1 px-6">Заявки</v-list-item>
+                            <v-list-item to="/event/resume" class="mt-1 px-6" disabled>Итоги</v-list-item>
                         </v-list>
                     </template>
                     <template #buttons>
                         <v-divider class="mx-3"/>
                         <v-container class="">
                             <v-col class="pa-0 ma-0" align="center" justify="center">
-                                <v-btn depressed block>
+                                <v-btn depressed block class="btn-light">
                                     Сохранить все
                                 </v-btn>
-                                <v-btn class="mt-2" depressed block text>
+                                <v-btn class="mt-2" depressed block>
                                     Отправить в ИСУ
                                 </v-btn>
                             </v-col>
@@ -74,7 +64,7 @@
     .main-container {
         height: 100%;
         max-width: 2000px
-    } 
+    }
 
     .v-divider {
         border-color: rgba(232, 234, 246, 1) !important;
@@ -82,13 +72,21 @@
     }
 
     .theme--light.v-list-item:not(.v-list-item--active),
-    .v-list-item--link, .v-list-item {
+    .v-list-item--link, ::v-deep .v-list-item {
         min-height: 25px;
         /*font-family: "Roboto", serif;
         font-size: 14px;
         font-weight: 400;*/
         /* color: rgba(96, 96, 96, 1) !important; */
         padding: 0;
+    }
+
+    .v-list-group {
+        width: 100%;
+    }
+
+    ::v-deep .v-list-group__header {
+        padding-right: 16px;
     }
 
     .theme--light.v-list-item--active {
@@ -102,12 +100,12 @@
     .v-btn {
         color: rgba(57, 73, 171, 1) !important;
     }
-    
+
     .row {
         height: 100%
     }
 
     /* .theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined)  { */
-        /* background-color: #E8EAF6 !important; */
+    /* background-color: #E8EAF6 !important; */
     /* } */
 </style>

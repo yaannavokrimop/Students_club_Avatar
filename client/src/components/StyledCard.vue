@@ -49,7 +49,7 @@
     @import url("https://fonts.googleapis.com/css?family=Oswald");
 
     .v-divider {
-         border-color: rgba(232, 234, 246, 1) !important;
+         border-color: rgba(216, 216, 216, 1) !important;
          border-top-width: 2px
      }
 

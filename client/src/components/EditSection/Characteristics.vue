@@ -13,7 +13,7 @@
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Периодичность</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Периодичность</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete :v-model="charact.periodicity"
                                             :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
@@ -21,7 +21,7 @@
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Категория</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Категория</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete :v-model="charact.category"
                                             :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
@@ -29,7 +29,7 @@
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Публичность</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Публичность</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete :v-model="charact.publicity"
                                             :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
@@ -37,7 +37,7 @@
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
-                        <v-col cols="4" class="py-0"><span>Формат проведения</span></v-col>
+                        <v-col cols="4" class="pt-2"><span>Формат проведения</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete :v-model="charact.format"
                                             :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
@@ -56,7 +56,7 @@
                 <template #buttons>
                     <v-container class="pt-0">
                         <v-row class="px-5" justify="end">
-                            <v-btn depressed>
+                            <v-btn depressed class="btn-accent">
                                 Сохранить
                             </v-btn>
                         </v-row>
@@ -147,10 +147,4 @@
 </script>
 
 <style scoped>
-
-    .v-btn {
-        background-color: #3949AB !important;
-        color: white
-    }
-
 </style>
