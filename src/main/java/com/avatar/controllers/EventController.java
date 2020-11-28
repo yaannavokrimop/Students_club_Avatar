@@ -3,6 +3,7 @@ package com.avatar.controllers;
 import com.avatar.models.bean.SearchParam;
 import com.avatar.models.dto.EventDto;
 import com.avatar.models.entities.Event;
+import com.avatar.services.DateService;
 import com.avatar.services.EventService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.DateTimeException;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,11 +20,17 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EventController {
     private final EventService eventService;
+    private final DateService dateService;
 
     @PostMapping("/create")
-    public ResponseEntity<UUID> createEvent(@RequestBody EventDto eventDto) {
-        UUID eventId = eventService.create(eventDto);
-        return ResponseEntity.ok(eventId);
+    public ResponseEntity createEvent(@RequestBody EventDto eventDto) {
+        try {
+            dateService.checkDate(eventDto.getDateFrom(), eventDto.getDateTo());
+        } catch (DateTimeException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+            UUID eventId = eventService.create(eventDto);
+            return ResponseEntity.ok(eventId);
     }
 
     @GetMapping("/all")

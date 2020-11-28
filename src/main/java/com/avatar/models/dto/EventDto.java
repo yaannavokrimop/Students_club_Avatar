@@ -1,9 +1,11 @@
 package com.avatar.models.dto;
 
 import com.avatar.models.enums.EventStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.UUID;
@@ -18,7 +20,9 @@ public class EventDto {
     private String status;
     private String type;
     private String typeOfActivity;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date dateFrom;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date dateTo;
     private boolean dateFlag;
     private EventStatus eventStatus;

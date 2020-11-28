@@ -46,7 +46,7 @@ public class EventService {
 
     public Event updateEventMainInfo(EventDto eventDto, UUID eventId) {
         Event dbEvent = eventRepo.findById(eventId).orElseThrow(NullPointerException::new);
-        Event inputEvent = transformToEvent(eventDto);
+        Event inputEvent = EventMapper.INSTANCE.EventDtoToEvent(eventDto);
         BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preRelease");
         return eventRepo.save(dbEvent);
     }
@@ -86,19 +86,11 @@ public class EventService {
         return eventDtoList;
     }
 
-//    public EventDto transformToEventDto(Event event) {
-//        EventDto eventDto = new EventDto(event.getName(), event.getDateTimeStart(), event.getDateTimeFinish(), event.isDateApproximate());
-//        eventDto.setId(event.getId());
-//        eventDto.setEventStatus(event.getEventStatus());
-//        return eventDto;
-//    }
+   /* public EventDto transformToEventDto(Event event) {
+        EventDto eventDto = new EventDto(event.getName(), event.getDateTimeStart(), event.getDateTimeFinish(), event.isDateApproximate());
+        eventDto.setId(event.getId());
+        eventDto.setEventStatus(event.getEventStatus());
+        return eventDto;
+    }*/
 
-    public Event transformToEvent(EventDto eventDto) {
-        Event event = new Event(eventDto.getName(), eventDto.getDateFrom(), eventDto.getDateTo());
-        event.setShortName(eventDto.getShortName());
-        event.setStatus(eventDto.getStatus());
-        event.setType(eventDto.getType());
-        event.setActivityType(eventDto.getTypeOfActivity());
-        return event;
-    }
 }

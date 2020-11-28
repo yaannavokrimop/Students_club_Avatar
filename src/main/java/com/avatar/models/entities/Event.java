@@ -1,8 +1,10 @@
 package com.avatar.models.entities;
 
 import com.avatar.models.enums.EventStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,30 +31,24 @@ public class Event {
 
     private String status;
 
-    private String mainLanguage;
-
     private String activityType;
 
-    private String category;
-
-    private String publicity;
-
-    private String format;
-
     @Column(nullable = false)
+
     private Date dateTimeStart;
 
     @Column(nullable = false)
+
     private Date dateTimeFinish;
 
     @Column(nullable = false)
     private boolean isDateApproximate;
 
-    private String comment;
-
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
+
+    private String site;
 
     /*@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Characteristic> characteristics;*/
@@ -60,7 +56,7 @@ public class Event {
     /*@OneToOne(mappedBy = "event", orphanRemoval = true)
     private Preview preview;*/
 
-    public Event(String name, Date dateFrom, Date dateTo) {
+    public Event(String name, Date dateFrom, Date dateTo, boolean isDateApproximate) {
         this.name = name;
         this.dateTimeStart = dateFrom;
         this.dateTimeFinish = dateTo;
