@@ -9,28 +9,63 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Приглашаются к участию</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.invited" placeholder="Название" rows="2" dense
-                                        outlined></v-textarea>
+                            <v-textarea :v-model="members.invited" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Контактное лицо</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.contact" placeholder="Название" rows="2" dense
-                                        outlined></v-textarea>
+                            <v-textarea :v-model="members.contact" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Сторонние организаторы</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.organizers" placeholder="Название" rows="2" dense
-                                        outlined></v-textarea>
+                            <v-textarea :v-model="members.sideOrganizers" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Организаторы</span></v-col>
                         <v-col class="py-0">
-                            <v-btn depressed block class="btn-light"> <v-icon class="mr-4">mdi-plus</v-icon> Добавить организатора</v-btn>
+                            <v-btn depressed block class="btn-light">
+                                <v-icon class="mr-4">mdi-plus</v-icon>
+                                Добавить организатора
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                    <v-row class="px-5">
+                        <v-col cols="12">
+                            <v-simple-table>
+                                <template v-slot:default>
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">
+                                            Таб. номер
+                                        </th>
+                                        <th class="text-left">
+                                            ФИО
+                                        </th>
+                                        <th class="text-left">
+                                            Роль
+                                        </th>
+                                        <th class="text-left">
+                                            Комментарий
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr
+                                            v-for="item in members.organisers"
+                                            :key="item.number"
+                                    >
+                                        <td>{{ item.number }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.role }}</td>
+                                        <td>{{ item.comment }}</td>
+                                    </tr>
+                                    </tbody>
+                                </template>
+                            </v-simple-table>
                         </v-col>
                     </v-row>
                 </template>
@@ -50,20 +85,25 @@
 
 <script>
     import StyledCard from "../StyledCard";
+
     export default {
         name: "Members",
-        components: { StyledCard },
+        components: {StyledCard},
 
         data: () => ({
             members: {
                 invited: '',
                 contact: '',
-                organizers: '',
+                sideOrganizers: '',
+                organisers: [
+                    { number: '267804', name: 'Елисеева Елена Андреевна', role: 'Организатор', comment: '' },
+                    { number: '256777', name: 'Помиркованная Вера Евгеньевна', role: 'Организатор', comment: '' }
+                ],
             }
         }),
 
         methods: {
-            saveMembers(){
+            saveMembers() {
 
             }
         }

@@ -4,7 +4,7 @@
             mini-variant-width="65"
             app
     >
-        <v-list nav class="py-1">
+        <v-list nav>
             <v-list-item class="px-0 my-2">
                 <v-list-item-avatar>
                     <img src="https://randomuser.me/api/portraits/women/21.jpg">
@@ -13,9 +13,10 @@
 
             <v-divider/>
 
-            <v-list-item class="my-2" :ripple="false">
+            <v-list-item class="v-list-item--link my-2" :ripple="false" @click="onCreateEvent">
                 <v-list-item-icon>
-                    <CreateEventDialog/>
+                    <v-icon color="white">mdi-plus</v-icon>
+                    <CreateEventDialog :propVisible="dialogVisible" @close="onCreateEvent"/>
                 </v-list-item-icon>
             </v-list-item>
 
@@ -44,9 +45,14 @@
     export default {
         name: "SideBar",
         data: () => ({
-
+            dialogVisible: false
         }),
-        components: { CreateEventDialog }
+        components: { CreateEventDialog },
+        methods: {
+            onCreateEvent(){
+                this.dialogVisible = !this.dialogVisible;
+            }
+        }
     }
 </script>
 

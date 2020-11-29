@@ -10,7 +10,7 @@
                         Выезд в приют
                     </template>
                     <template #card-text>
-                        <v-list class="py-0" :color="color" dense>
+                        <v-list class="pt-0 pb-4" :color="color" dense>
                             <v-list-item to="/event/main" class="my-1 px-6">Основное</v-list-item>
                             <v-list-item to="/event/characteristics" class="my-1 px-6">Характеристики</v-list-item>
                             <v-list-item to="/event/preview" class="my-1 px-6">Анонс</v-list-item>

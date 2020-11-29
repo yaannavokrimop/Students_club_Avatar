@@ -48,7 +48,7 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
 
-    private String site;
+    //private String site;
 
     /*@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Characteristic> characteristics;*/

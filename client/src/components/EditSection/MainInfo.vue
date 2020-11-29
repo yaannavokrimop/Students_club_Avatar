@@ -231,20 +231,4 @@
 </script>
 
 <style scoped>
-    .v-expansion-panel-header {
-        color: rgba(96, 96, 96, 1) !important;
-    }
-
-    .v-expansion-panel-content {
-        color: rgba(96, 96, 96, 1) !important;
-        font-size: 14px;
-    }
-
-    button, input, select, textarea, .v-input {
-        font-size: 14px;
-    }
-
-    /* .row {
-        height: 100%
-    } */
 </style>

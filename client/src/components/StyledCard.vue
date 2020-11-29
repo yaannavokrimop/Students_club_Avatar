@@ -16,7 +16,7 @@
 
         <v-divider class="mx-3" v-if="hasSubtitle"/>
 
-        <v-card-text class="text--primary px-0">
+        <v-card-text class="text--primary px-0 pb-0">
             <slot name="card-text"/>
         </v-card-text>
 
@@ -55,11 +55,13 @@
 
     .v-card__title {
         font-family: "Oswald", Helvetica, Arial;
-        font-weight: 700;
-        font-size: 22px;
-        letter-spacing: 2px;
-        padding-bottom: 8px;
-        padding-left: 22px;
+        font-weight: 700 !important;
+        font-size: 22px !important;
+        letter-spacing: 2px !important;
+
+        height: 56px !important;
+        padding-bottom: 8px !important;
+        padding-left: 22px !important;
     }
 
     .subtitle {

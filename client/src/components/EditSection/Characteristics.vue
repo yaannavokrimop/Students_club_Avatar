@@ -72,7 +72,7 @@
                 <template #card-text>
                     <v-expansion-panels accordion flat>
                         <v-expansion-panel>
-                            <v-expansion-panel-header :color="color">Количество участников (план)</v-expansion-panel-header>
+                            <v-expansion-panel-header>Количество участников (план)</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 <div>
                                     Полное название включает как творческое имя в кавычках ("День донора"), так и
@@ -86,35 +86,35 @@
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header :color="color">Периодичность</v-expansion-panel-header>
+                            <v-expansion-panel-header>Периодичность</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header :color="color">Категория</v-expansion-panel-header>
+                            <v-expansion-panel-header>Категория</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header :color="color">Публичность</v-expansion-panel-header>
+                            <v-expansion-panel-header>Публичность</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header :color="color">Формат проведения</v-expansion-panel-header>
+                            <v-expansion-panel-header>Формат проведения</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
-                            <v-expansion-panel-header :color="color">Основной язык проведения</v-expansion-panel-header>
+                            <v-expansion-panel-header>Основной язык проведения</v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 Примерные сроки используются, если нужно указать, что указанные даты проведения
                                 неокончательные и могут быть отредактрированы в дальнейшем
