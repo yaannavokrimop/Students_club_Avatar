@@ -11,13 +11,13 @@
                     </template>
                     <template #card-text>
                         <v-list class="pt-0 pb-4" :color="color" dense>
-                            <v-list-item to="/event/main" class="my-1 px-6">Основное</v-list-item>
-                            <v-list-item to="/event/characteristics" class="my-1 px-6">Характеристики</v-list-item>
-                            <v-list-item to="/event/preview" class="my-1 px-6">Анонс</v-list-item>
-                            <v-list-item to="/event/members" class="my-1 px-6">Участники</v-list-item>
-                            <v-list-item to="/event/location" class="my-1 px-6">Места проведения</v-list-item>
-                            <v-list-item to="/event/requests" class="my-1 px-6">Заявки</v-list-item>
-                            <v-list-item to="/event/resume" class="mt-1 px-6" disabled>Итоги</v-list-item>
+                            <v-list-item :to="`/event/${currentId}/main`" class="my-1 px-6">Основное</v-list-item>
+                            <v-list-item :to="`/event/${currentId}/characteristics`" class="my-1 px-6">Характеристики</v-list-item>
+                            <v-list-item :to="`/event/${currentId}/preview`" class="my-1 px-6">Анонс</v-list-item>
+                            <v-list-item :to="`/event/${currentId}/members`" class="my-1 px-6">Участники</v-list-item>
+                            <v-list-item :to="`/event/${currentId}/location`" class="my-1 px-6">Места проведения</v-list-item>
+                            <v-list-item :to="`/event/${currentId}/requests`" class="my-1 px-6">Заявки</v-list-item>
+                            <v-list-item :to="`/event/${currentId}/resume`" class="mt-1 px-6" disabled>Итоги</v-list-item>
                         </v-list>
                     </template>
                     <template #buttons>
@@ -46,6 +46,7 @@
 
 <script>
     import StyledCard from "../components/StyledCard";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "Event",
@@ -54,7 +55,10 @@
         },
         data: () => ({
             color: 'rgba(246, 246, 246, 1)'
-        })
+        }),
+        computed: {
+            ...mapGetters(['currentId']),
+        },
     }
 </script>
 

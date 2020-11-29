@@ -124,15 +124,23 @@
             menuDateTo: false,
         }),
         computed: {
-            ...mapGetters(['required']),
+            ...mapGetters(['required', 'eventShortEmpty']),
         },
         methods: {
             ...mapActions(['createEvent']),
             onCreateEvent(){
                 if (this.$refs.form.validate()) {
-                    this.$store.dispatch('createEvent', this.eventShort);
+                    //this.$store.dispatch('createEvent', this.eventShort);
+                    this.createEvent(this.eventShort).then(id => {
+                        this.visible = false;
+                        this.clearForm()
+                        this.$router.push({name: 'event', params: { id }});
+                    });
                 }
-                //this.createEvent(this.eventShort);
+            },
+            clearForm() {
+                //this.eventShort = this.eventShortEmpty;
+                this.$refs.form.reset();
             }
         },
         watch: {
@@ -140,7 +148,10 @@
                 propVisible === true ? this.visible = propVisible : null;
             },
             visible(visible) {
-                visible === false ? this.$emit('close') : null;
+                if (visible === false) {
+                    this.$emit('close');
+                    this.clearForm();
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ const state = {
         format: '',
         language: ''
     },
+    characts: []
 };
 
 const mutations = {

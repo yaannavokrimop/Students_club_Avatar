@@ -20,19 +20,20 @@ Vue.use(VueRouter);
 const routes = [
   { path: '/eventsList', component: EventsList },
   {
-    path: '/event',
-    redirect: '/event/main',
+    path: '/event/:id',
+    name: 'event',
+    redirect: '/event/:id/main',
     component: Event,
     children: [
-      { path: '/event/main', component: MainInfo },
-      { path: '/event/characteristics', component: Characteristics },
-      { path: '/event/preview', component: Preview },
-      { path: '/event/members', component: Members },
-      { path: '/event/location', component: Location },
-      { path: '/event/resume', component: Resume },
-      { path: '/event/causeDocument', component: CauseDocument },
-      { path: '/event/requests', component: Requests },
-      { path: '/event/decree', component: Decree },
+      { path: 'main', name: 'main', component: MainInfo },
+      { path: 'characteristics', component: Characteristics },
+      { path: 'preview', component: Preview },
+      { path: 'members', component: Members },
+      { path: 'location', component: Location },
+      { path: 'resume', component: Resume },
+      { path: 'causeDocument', component: CauseDocument },
+      { path: 'requests', component: Requests },
+      { path: 'decree', component: Decree },
     ]
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -47,6 +48,6 @@ const router = new VueRouter({
 });
 
 
-router.push('/event/main');
+router.push('/eventsList');
 
 export default router

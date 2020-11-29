@@ -35,37 +35,17 @@
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="12">
-                            <v-simple-table>
-                                <template v-slot:default>
-                                    <thead>
-                                    <tr>
-                                        <th class="text-left">
-                                            Таб. номер
-                                        </th>
-                                        <th class="text-left">
-                                            ФИО
-                                        </th>
-                                        <th class="text-left">
-                                            Роль
-                                        </th>
-                                        <th class="text-left">
-                                            Комментарий
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr
-                                            v-for="item in members.organisers"
-                                            :key="item.number"
-                                    >
-                                        <td>{{ item.number }}</td>
-                                        <td>{{ item.name }}</td>
-                                        <td>{{ item.role }}</td>
-                                        <td>{{ item.comment }}</td>
-                                    </tr>
-                                    </tbody>
-                                </template>
-                            </v-simple-table>
+                           <v-data-table
+                                   :headers="headers"
+                                   :items="members.organisers"
+                                   :items-per-page="5"
+                                   fixed-header
+                                   hide-default-footer
+                           >
+                               <template #no-data>
+                                   <span>Нет организаторов</span>
+                               </template>
+                           </v-data-table>
                         </v-col>
                     </v-row>
                 </template>
@@ -85,6 +65,7 @@
 
 <script>
     import StyledCard from "../StyledCard";
+    import {mapActions} from "vuex";
 
     export default {
         name: "Members",
@@ -95,16 +76,27 @@
                 invited: '',
                 contact: '',
                 sideOrganizers: '',
-                organisers: [
-                    { number: '267804', name: 'Елисеева Елена Андреевна', role: 'Организатор', comment: '' },
-                    { number: '256777', name: 'Помиркованная Вера Евгеньевна', role: 'Организатор', comment: '' }
-                ],
-            }
+                organisers: [],
+            },
+            headers: [
+                { text: 'Таб. номер', value: 'number', sortable: false },
+                { text: 'ФИО', value: 'name', sortable: false },
+                { text: 'Роль', value: 'role', sortable: false },
+                { text: 'Комментарий', value: 'comment', sortable: false }
+            ],
         }),
-
         methods: {
-            saveMembers() {
-
+            ...mapActions(['getEvent']),
+        },
+        watch: {
+            $route: {
+                immediate: true,
+                handler() {
+                    this.id = this.$route.params.id;
+                    this.getEvent(+this.id).then(event => {
+                        this.event = {...this.charact, ...event};
+                    })
+                }
             }
         }
     }
