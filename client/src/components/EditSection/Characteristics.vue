@@ -25,7 +25,7 @@
                         <v-col cols="4" class="pt-2"><span>Категория</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete v-model="event.category"
-                                            :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
+                                            :items="['Внутреннее', 'В РФ', 'За рубежом', 'МООС']"
                                             placeholder="Категория" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>
@@ -33,7 +33,7 @@
                         <v-col cols="4" class="pt-2"><span>Публичность</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete v-model="event.publicity"
-                                            :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
+                                            :items="['Открытое', 'Закрытое']"
                                             placeholder="Публичность" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>
@@ -41,7 +41,7 @@
                         <v-col cols="4" class="pt-2"><span>Формат проведения</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete v-model="event.format"
-                                            :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
+                                            :items="['Очно', 'Онлайн', 'Смешанные']"
                                             placeholder="Формат проведения" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>
@@ -49,7 +49,7 @@
                         <v-col cols="4" class="py-0"><span>Основной язык проведения</span></v-col>
                         <v-col class="py-0">
                             <v-autocomplete v-model="event.language"
-                                            :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
+                                            :items="[ 'Русский', 'Английский', 'Русский + Английский', 'Испанский', 'Итальянский', 'Казахский', 'Китайский', 'Немецкий', 'Польский', 'Украинский', 'Французский' ]"
                                             placeholder="Основной язык проведения" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>

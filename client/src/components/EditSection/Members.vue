@@ -34,10 +34,10 @@
                         <v-col cols="12">
                            <v-data-table
                                    :headers="headers"
-                                   :items="members.organisers"
+                                   :items="event.organisers"
                                    :items-per-page="5"
                                    fixed-header
-                                   hide-default-footer dense
+                                   hide-default-footer
                            >
                                <template #no-data>
                                    <span>Нет организаторов</span>
@@ -92,7 +92,7 @@
                 this.editEvent(this.event);
             },
             addOrganiser(organiser){
-                this.members.organisers.push({...organiser})
+                this.event.organisers.push({...organiser})
             }
         },
         watch: {
