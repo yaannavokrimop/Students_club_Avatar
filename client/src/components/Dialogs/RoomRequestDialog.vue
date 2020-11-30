@@ -128,7 +128,7 @@ export default {
   computed: {...mapGetters(['buildings', 'rooms'])},
   methods: {
     onAddRequest() {
-      this.$emit('addRequest', this.request);
+      this.$emit('save', this.request);
       this.visible = false;
       this.$refs.form.reset();
     },

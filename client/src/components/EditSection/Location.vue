@@ -74,6 +74,56 @@
       </StyledCard>
 
     </v-col>
+    <v-col class="pa-0 mr-2" cols="4" v-if="showHelp">
+      <StyledCard closable :close="toggleHelp" :color="color">
+        <template #title>
+          Подсказки
+        </template>
+        <template #card-text>
+          <v-expansion-panels accordion flat>
+            <v-expansion-panel>
+              <v-expansion-panel-header :color="color">Места проведения в ИТМО</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <div>
+                  Полное название включает как творческое имя в кавычках ("День донора"), так и
+                  статусное описание
+                  мероприятия: международная научная конференция, всероссийский
+                  турнир, благотворительная акция и т.д.
+                </div>
+                <div>
+                  Для периодичсеких мероприятий не стоит указывать год/сезон/месяц.
+                </div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header :color="color">Места проведения вне ИТМО</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                Примерные сроки используются, если нужно указать, что указанные даты проведения
+                неокончательные и могут быть отредактрированы в дальнейшем
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </template>
+      </StyledCard>
+    </v-col>
+    <v-fab-transition>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+              v-show="!showHelp"
+              bottom
+              right
+              fab depressed
+              @click="toggleHelp"
+              class="mr-8 ml-2"
+              v-on="on"
+          >
+            <v-icon>mdi-help</v-icon>
+          </v-btn>
+        </template>
+        Открыть подсказки
+      </v-tooltip>
+    </v-fab-transition>
   </v-row>
 </template>
 
@@ -101,7 +151,10 @@ export default {
     locations: [],
     locationsCalendar: [],
     id: '',
-    event: {}
+    event: {},
+
+    showHelp: true,
+    color: 'rgba(246, 246, 246, 1)'
   }),
   methods: {
     ...mapActions(['getEvent', 'editEvent']),
@@ -141,7 +194,10 @@ export default {
     },
     onSave() {
       this.editEvent(this.event);
-    }
+    },
+    toggleHelp() {
+      this.showHelp = !this.showHelp
+    },
   },
   computed: {
     multipleDays() {

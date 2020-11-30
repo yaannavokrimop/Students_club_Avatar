@@ -36,7 +36,7 @@
                 </v-list-item-icon>
             </v-list-item>
 
-          <v-divider  class="margin"/>
+          <v-divider class="margin"/>
 
           <v-list-item class="my-2" :ripple="false">
             <v-list-item-icon>

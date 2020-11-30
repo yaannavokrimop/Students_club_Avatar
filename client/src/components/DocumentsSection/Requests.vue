@@ -6,16 +6,37 @@
           Заявки
         </template>
         <template #card-text class="pb-0">
+          <v-row class="px-8"><span class="span">Ваши заявки</span></v-row>
           <v-row class="px-5">
             <v-col cols="4">
-              <v-card @click="roomDialog = true" :color="cardColor" flat height="150">
+              <v-card @click="roomDialog = true" :color="cardColor" flat height="120">
                 <v-card-title class="text-uppercase pb-2">Помещение</v-card-title>
-                <v-card-text>{{roomRequest.building}} {{roomRequest.room}}</v-card-text>
+                <v-card-text>{{ roomRequest.building }} {{ roomRequest.room }}</v-card-text>
               </v-card>
-              <RoomRequestDialog @save="addRequest" @close="onRoomsRequestClose" :roomRequest="roomRequest" :prop-visible="roomDialog"></RoomRequestDialog>
+              <RoomRequestDialog @save="addRequest" @close="onRoomsRequestClose" :roomRequest="roomRequest"
+                                 :prop-visible="roomDialog"></RoomRequestDialog>
             </v-col>
             <v-col cols="4">
 
+            </v-col>
+          </v-row>
+
+          <v-row class="px-8"><span class="span">Возможно, вам так же понадобятся</span></v-row>
+          <v-row class="px-5">
+            <v-col cols="4">
+              <v-card :color="lightCardColor" flat height="120">
+                <v-card-title class="text-uppercase addedCard pb-2">Волонтеры</v-card-title>
+              </v-card>
+            </v-col>
+            <v-col cols="4">
+              <v-card :color="lightCardColor" flat height="120">
+                <v-card-title class="text-uppercase addedCard pb-2">Оборудование</v-card-title>
+              </v-card>
+            </v-col>
+            <v-col cols="4">
+              <v-card :color="lightCardColor" flat height="120">
+                <v-card-title class="text-uppercase addedCard pb-2">Въезд на территорию университета</v-card-title>
+              </v-card>
             </v-col>
           </v-row>
         </template>
@@ -70,7 +91,7 @@ import StyledCard from "@/components/StyledCard";
 import RoomRequestDialog from "@/components/Dialogs/RoomRequestDialog";
 
 export default {
-  components: { StyledCard, RoomRequestDialog },
+  components: {StyledCard, RoomRequestDialog},
   data: () => ({
     roomDialog: false,
     roomRequest: {
@@ -79,17 +100,19 @@ export default {
       date: ''
     },
     cardColor: '#7986CB',
+    lightCardColor: '#E8EAF6',
     color: 'rgba(246, 246, 246, 1)',
     event: {}
   }),
   methods: {
-    ...mapActions(['getEvent']),
+    ...mapActions(['getEvent', 'editEvent']),
     onRoomsRequestClose() {
-        this.roomDialog = false;
+      this.roomDialog = false;
     },
     addRequest(request) {
       this.event.requests.push({...request});
       this.roomRequest = ({...request});
+      this.editEvent(this.event);
     }
   },
   watch: {
@@ -98,15 +121,19 @@ export default {
       handler() {
         this.id = this.$route.params.id;
         this.getEvent(+this.id).then(event => {
-          this.event = { requests: [], ...event};
-
-          const location = this.event.locations.find(item => item.address === '');
-          if (location) {
-            this.roomRequest.building = location.building;
-            this.roomRequest.room = location.room;
-            this.roomRequest.date = location.date;
-            this.roomRequest.timeFrom = location.timeFrom;
-            this.roomRequest.timeTo = location.timeTo;
+          this.event = {requests: [], ...event};
+          const request = this.event.requests.find(item => item.name === 'roomRequest')
+          if (request)
+            this.roomRequest = {...request};
+          else {
+            const location = this.event.locations.find(item => item.address === '');
+            if (location) {
+              this.roomRequest.building = location.building;
+              this.roomRequest.room = location.room;
+              this.roomRequest.date = location.date;
+              this.roomRequest.timeFrom = location.timeFrom;
+              this.roomRequest.timeTo = location.timeTo;
+            }
           }
         })
       }
@@ -116,16 +143,25 @@ export default {
 </script>
 
 <style scoped>
- .v-card__title {
-   color: white;
-   font-family: Roboto;
-   font-size: 16px;
-   font-weight: 400;
-   line-height: 16px;
-   letter-spacing: 0.05em;
- }
- .v-card__text {
-   color: white !important;
- }
+.v-card__title {
+  color: white;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.05em;
+}
+
+.v-card__text {
+  color: white !important;
+}
+
+.span {
+  color: grey
+}
+
+.addedCard {
+  color: #3949AB
+}
 
 </style>
