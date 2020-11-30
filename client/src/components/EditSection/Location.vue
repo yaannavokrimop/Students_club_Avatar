@@ -115,7 +115,7 @@
               right
               fab depressed
               @click="toggleHelp"
-              class="mr-8 ml-2"
+              class="mr-8 ml-2 mt-2"
               v-on="on"
           >
             <v-icon>mdi-help</v-icon>
@@ -154,7 +154,9 @@ export default {
     event: {},
 
     showHelp: true,
-    color: 'rgba(246, 246, 246, 1)'
+    color: 'rgba(246, 246, 246, 1)',
+
+    isSaved: false
   }),
   methods: {
     ...mapActions(['getEvent', 'editEvent']),
@@ -194,6 +196,7 @@ export default {
     },
     onSave() {
       this.editEvent(this.event);
+      this.isSaved = true;
     },
     toggleHelp() {
       this.showHelp = !this.showHelp
@@ -216,7 +219,7 @@ export default {
         })
       }
     }
-  }
+  },
 }
 </script>
 
