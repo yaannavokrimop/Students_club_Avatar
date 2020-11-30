@@ -28,6 +28,12 @@ const mutations = {
         if (index > -1){
             state.events[index] = {...state.events[index], ...event}
         }
+    },
+    DELETE_EVENT(state, id) {
+        const index = state.events.findIndex(x => x.id === id);
+        if (index > -1){
+            state.events.slice(index, 1);
+        }
     }
 };
 
@@ -55,7 +61,11 @@ const actions = {
     },
 
     editEvent({ commit }, newEvent){
-        commit('EDIT_EVENT', newEvent)
+        commit('EDIT_EVENT', newEvent);
+    },
+
+    deleteEvent({ commit }, id){
+        commit('DELETE_EVENT', id);
     }
 
 };

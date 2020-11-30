@@ -72,10 +72,10 @@ export default {
       }
     },
     editItem (item){
-      console.log(item)
+      this.$router.push({name: 'event', params: {id: item.id}});
     },
     deleteItem (item){
-      console.log(item)
+      this.
     }
   }
   /*created: function () {
