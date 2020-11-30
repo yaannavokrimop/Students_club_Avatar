@@ -44,7 +44,7 @@
 
 <script>
 //import {HTTP} from "@/http-common";
-import {mapGetters} from "vuex";
+import {mapGetters, mapActions } from "vuex";
 
 import StyledCard from "@/components/StyledCard";
 
@@ -59,8 +59,9 @@ export default {
       {text: '', value: 'actions'}
     ]
   }),
-  computed: {...mapGetters(["events"])},
+  computed: {...mapGetters(['events'])},
   methods: {
+    ...mapActions(['deleteEvent']),
     getColor (status) {
       switch (status) {
         case 'draft': return 'grey'
@@ -75,7 +76,7 @@ export default {
       this.$router.push({name: 'event', params: {id: item.id}});
     },
     deleteItem (item){
-      this.
+      this.deleteEvent(item.id);
     }
   }
   /*created: function () {
