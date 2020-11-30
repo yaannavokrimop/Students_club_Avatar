@@ -52,7 +52,7 @@
                 <template #buttons>
                     <v-container class="pt-0">
                         <v-row class="px-5" justify="end">
-                            <v-btn depressed class="btn-accent">
+                            <v-btn @click="onSave" depressed class="btn-accent">
                                 Сохранить
                             </v-btn>
                         </v-row>
@@ -143,7 +143,10 @@
             color: 'rgba(246, 246, 246, 1)'
         }),
         methods: {
-            ...mapActions(['getEvent']),
+            ...mapActions(['getEvent', 'editEvent']),
+            onSave() {
+                this.editEvent(this.event);
+            }
         },
         watch: {
             $route: {
@@ -151,7 +154,7 @@
                 handler() {
                     this.id = this.$route.params.id;
                     this.getEvent(+this.id).then(event => {
-                        this.event = {...this.charact, ...event};
+                        this.event = {...this.preview, ...event};
                     })
                 }
             }

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import CreateEventDialog from "./CreateEventDialog";
+    import CreateEventDialog from "./Dialogs/CreateEventDialog";
     export default {
         name: "SideBar",
         data: () => ({

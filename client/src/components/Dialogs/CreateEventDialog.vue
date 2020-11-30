@@ -105,7 +105,7 @@
 
 <script>
     import { mapGetters, mapActions } from "vuex";
-    import StyledCard from './StyledCard'
+    import StyledCard from '../StyledCard'
 
     export default {
         name: "CreateEventDialog",

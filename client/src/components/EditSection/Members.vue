@@ -9,28 +9,25 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Приглашаются к участию</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.invited" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="event.invited" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Контактное лицо</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.contact" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="event.contact" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Сторонние организаторы</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.sideOrganizers" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="event.sideOrganizers" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Организаторы</span></v-col>
                         <v-col class="py-0">
-                            <v-btn depressed block class="btn-light">
-                                <v-icon class="mr-4">mdi-plus</v-icon>
-                                Добавить организатора
-                            </v-btn>
+                           <AddOrganiserDialog @addOrganiser="addOrganiser"/>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
@@ -40,7 +37,7 @@
                                    :items="members.organisers"
                                    :items-per-page="5"
                                    fixed-header
-                                   hide-default-footer
+                                   hide-default-footer dense
                            >
                                <template #no-data>
                                    <span>Нет организаторов</span>
@@ -52,7 +49,7 @@
                 <template #buttons>
                     <v-container class="pt-0">
                         <v-row class="px-5" justify="end">
-                            <v-btn depressed @click="saveMembers" class="btn-accent">
+                            <v-btn depressed @click="onSave" class="btn-accent">
                                 Сохранить
                             </v-btn>
                         </v-row>
@@ -64,14 +61,18 @@
 </template>
 
 <script>
+    import { mapActions } from "vuex";
+
     import StyledCard from "../StyledCard";
-    import {mapActions} from "vuex";
+    import AddOrganiserDialog from "../Dialogs/AddOrganiserDialog";
 
     export default {
         name: "Members",
-        components: {StyledCard},
+        components: { StyledCard, AddOrganiserDialog },
 
         data: () => ({
+            id: '',
+            event: {},
             members: {
                 invited: '',
                 contact: '',
@@ -86,7 +87,13 @@
             ],
         }),
         methods: {
-            ...mapActions(['getEvent']),
+            ...mapActions(['getEvent', 'editEvent']),
+            onSave() {
+                this.editEvent(this.event);
+            },
+            addOrganiser(organiser){
+                this.members.organisers.push({...organiser})
+            }
         },
         watch: {
             $route: {
@@ -94,7 +101,7 @@
                 handler() {
                     this.id = this.$route.params.id;
                     this.getEvent(+this.id).then(event => {
-                        this.event = {...this.charact, ...event};
+                        this.event = {...this.members, ...event};
                     })
                 }
             }
@@ -103,5 +110,4 @@
 </script>
 
 <style scoped>
-
 </style>

@@ -6,22 +6,25 @@
                     Места проведения
                 </template>
                 <template #card-text>
-                    <v-sheet height="500">
-                        <v-calendar ref="calendar"
-                                    v-model="focus"
-                                    color="primary"
-                                    type="category"
-                                    category-show-all
-                                    :events="events"
-                                    :start="today"
-                                    :value="today"
-                                    locale="ru"
-                                    :firstInterval="firstInterval"
-                                    :intervalCount="24 - firstInterval"
-                                    flat depressed
-                        >
-                        </v-calendar>
-                    </v-sheet>
+                    <div class="pr-6 pl-3">
+                        <AddLocationDialog :askForData="multipleDays"/>
+                        <v-sheet v-if="locations.length" height="500">
+                            <v-calendar ref="calendar"
+                                        v-model="focus"
+                                        color="primary"
+                                        type="category"
+                                        category-show-all
+                                        :events="locations"
+                                        :start="today"
+                                        :value="today"
+                                        locale="ru"
+                                        :firstInterval="firstInterval"
+                                        :intervalCount="24 - firstInterval"
+                                        flat depressed
+                            >
+                            </v-calendar>
+                        </v-sheet>
+                    </div>
                 </template>
             </StyledCard>
 
@@ -30,134 +33,53 @@
 </template>
 
 <script>
+    import {mapActions} from "vuex";
+
     import StyledCard from "../StyledCard";
+    import AddLocationDialog from "../Dialogs/AddLocationDialog";
 
     export default {
         name: "Location",
-        components: {StyledCard},
+        components: {StyledCard, AddLocationDialog},
         data: () => ({
-            today: '2020-10-17',
+            menuDate: false,
+            today: '2020-11-12',
             focus: '',
             firstInterval: 8,
-            events: [
-                {
+            locations: [
+                /*{
                     name: '111',
                     start: '2020-10-17 09:00',
                     end: '2020-10-17 09:15',
                     category: 'Кронв 111',
                     color: 'blue'
-                },
-                {
-                    name: '23',
-                    start: '2020-10-17 09:00',
-                    end: '2020-10-17 10:40',
-                    category: 'Кронв 23',
-                    color: 'green'
-                },
-                {
-                    name: '456',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв 456',
-                    color: 'cyan'
-                },
-                {
-                    name: '222',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв 222',
-                    color: 'cyan'
-                },
-                {
-                    name: '333',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв 333',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал1',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал2',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал3',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал4',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал5',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал6',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал7',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал8',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал9',
-                    color: 'cyan'
-                },
-                {
-                    name: 'Кронв Акт. зал',
-                    start: '2020-10-17 10:05',
-                    end: '2020-10-17 11:15',
-                    category: 'Кронв Акт. зал10',
-                    color: 'cyan'
-                }
+                }*/
             ],
+            id: '',
+            event: {}
         }),
         methods: {
-            getEventColor(event) {
-                return event.color
-            },
+            ...mapActions(['getEvent', 'editEvent']),
+            addLocation() {
+                
+            }
+        },
+        computed: {
+            multipleDays(){
+                return this.event.dateFrom !== this.event.dateTo;
+            }
+        },
+        watch: {
+            $route: {
+                immediate: true,
+                handler() {
+                    this.id = this.$route.params.id;
+                    this.getEvent(+this.id).then(event => {
+                        this.event = {...this.location, ...event};
+                        this.today = this.event.dateFrom;
+                    })
+                }
+            }
         }
     }
 </script>
