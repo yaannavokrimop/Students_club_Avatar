@@ -15,7 +15,7 @@
                 <v-col cols="4" class="pt-2"><span>Название</span></v-col>
                 <v-col class="py-0">
                   <v-text-field v-model="eventShort.name"
-                                placeholder="Краткое название"
+                                placeholder="Название"
                                 :rules="[required]"
                                 dense
                                 outlined

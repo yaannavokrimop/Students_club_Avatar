@@ -11,6 +11,23 @@ const state = {
     events: [],
     nextId: 0,
     currentId: 0,
+
+    buildings: [
+        'Ломоносова',
+        'Кронверкский',
+        'Гривцова',
+        'Чайковского',
+    ],
+    rooms: [
+        'ITMO Place',
+        'Актовый зал',
+        'Коворкинг',
+        'Переговорная (268)',
+        'Переговорная в ректорском холле (254)',
+        'Ауд. 206',
+        'Ауд. 302',
+        'Ауд. 314'
+    ]
 };
 
 const mutations = {
@@ -32,7 +49,7 @@ const mutations = {
     DELETE_EVENT(state, id) {
         const index = state.events.findIndex(x => x.id === id);
         if (index > -1){
-            state.events.slice(index, 1);
+            state.events.splice(index, 1);
         }
     }
 };
@@ -74,7 +91,10 @@ const getters = {
     //id: state => state.id,
     events: state => state.events,
     currentId: state => state.currentId,
-    eventShortEmpty: state => state.eventShortEmpty
+    eventShortEmpty: state => state.eventShortEmpty,
+
+    buildings: state => state.buildings,
+    rooms: state => state.rooms
 };
 
 export default {

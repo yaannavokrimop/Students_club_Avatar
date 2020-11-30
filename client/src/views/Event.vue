@@ -25,10 +25,7 @@
                         <v-container class="">
                             <v-col class="pa-0 ma-0" align="center" justify="center">
                                 <v-btn depressed block class="btn-light">
-                                    Сохранить все
-                                </v-btn>
-                                <v-btn class="mt-2" depressed block>
-                                    Отправить в ИСУ
+                                  Отправить в ИСУ
                                 </v-btn>
                             </v-col>
                         </v-container>

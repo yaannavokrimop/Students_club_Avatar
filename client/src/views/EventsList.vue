@@ -26,7 +26,7 @@
               >
                 mdi-pencil
               </v-icon>
-              <v-icon
+              <v-icon v-if="item.systemStatus === 'draft'"
                   @click="deleteItem(item)"
               >
                 mdi-delete

@@ -98,15 +98,7 @@ export default {
     today: '2020-11-12',
     focus: '',
     firstInterval: 8,
-    locations: [
-      /*{
-          name: '111',
-          start: '2020-10-17 09:00',
-          end: '2020-10-17 09:15',
-          category: 'Кронв 111',
-          color: 'blue'
-      }*/
-    ],
+    locations: [],
     locationsCalendar: [],
     id: '',
     event: {}

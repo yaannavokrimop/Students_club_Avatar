@@ -53,9 +53,15 @@
                                             placeholder="Основной язык проведения" dense outlined></v-autocomplete>
                         </v-col>
                     </v-row>
+                  <v-row class="px-7">
+                    <v-btn depressed block class="btn-light">
+                      <v-icon class="mr-4">mdi-plus</v-icon>
+                      Добавить характеристику
+                    </v-btn>
+                  </v-row>
                 </template>
                 <template #buttons>
-                    <v-container class="pt-0">
+                    <v-container class="pt-3">
                         <v-row class="px-5" justify="end">
                             <v-btn @click="onSave" depressed class="btn-accent">
                                 Сохранить
