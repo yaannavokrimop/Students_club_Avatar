@@ -36,6 +36,13 @@
                 </v-list-item-icon>
             </v-list-item>
 
+          <v-divider  class="margin"/>
+
+          <v-list-item class="my-2" :ripple="false">
+            <v-list-item-icon>
+              <v-icon color="white">mdi-exit-to-app</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
         </v-list>
     </v-navigation-drawer>
 </template>
@@ -76,5 +83,9 @@
 
     .v-list-item__icon {
         margin: 9px 0;
+    }
+
+    .margin {
+      margin-top: 500px
     }
 </style>

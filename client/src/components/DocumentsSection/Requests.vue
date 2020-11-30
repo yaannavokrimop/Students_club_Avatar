@@ -8,7 +8,7 @@
         <template #card-text class="pb-0">
           <v-row class="px-5">
             <v-col cols="4">
-              <v-card @click="roomDialog = true" :color="cardColor" flat height="100">
+              <v-card @click="roomDialog = true" :color="cardColor" flat height="150">
                 <v-card-title class="text-uppercase pb-2">Помещение</v-card-title>
                 <v-card-text>{{roomRequest.building}} {{roomRequest.room}}</v-card-text>
               </v-card>
@@ -89,6 +89,7 @@ export default {
     },
     addRequest(request) {
       this.event.requests.push({...request});
+      this.roomRequest = ({...request});
     }
   },
   watch: {
