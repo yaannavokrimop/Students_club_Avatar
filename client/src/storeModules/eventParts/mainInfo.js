@@ -1,7 +1,7 @@
 import { HTTP } from "@/http-common";
 
 const state = {
-    mainInfo: {
+    storeMainInfo: {
         name: '',
         shortName: '',
         status: '',
@@ -14,14 +14,14 @@ const state = {
 
 const mutations = {
     SET_MAININFO (state, mainInfo) {
-        state.mainInfo = mainInfo;
+        state.storeMainInfo = mainInfo;
     }
 };
 
 const actions = {
-    getMainInfo({ commit }){
+    getMainInfo({ commit }, id){
         HTTP
-            .get('/event/mainInfo')
+            .get('/event/mainInfo' + id)
             .then((response) => {
                 commit("SET_MAININFO", response.data);
             })
@@ -37,7 +37,7 @@ const actions = {
 };
 
 const getters = {
-    mainInfo: state => state.mainInfo
+    storeMainInfo: state => state.storeMainInfo
 };
 
 export default {

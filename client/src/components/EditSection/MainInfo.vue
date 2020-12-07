@@ -193,7 +193,7 @@
 </template>
 
 <script>
-    import { mapActions } from "vuex";
+    import { mapActions, mapGetters } from "vuex";
     import StyledCard from "../StyledCard";
     //import Help from "../Help";
 
@@ -220,8 +220,11 @@
             showHelp: true,
             color: 'rgba(246, 246, 246, 1)'
         }),
+      computed: {
+          ...mapGetters(['storeMainInfo'])
+      },
         methods: {
-            ...mapActions(['getEvent', 'editEvent']),
+            ...mapActions(['editEvent', 'getMainInfo']),
             toggleHelp() {
                 this.showHelp = !this.showHelp
             },
@@ -234,8 +237,8 @@
                 immediate: true,
                 handler() {
                     this.id = this.$route.params.id;
-                    this.getEvent(+this.id).then(event => {
-                        this.event = {...this.mainInfo, ...event};
+                    this.getMainInfo(+this.id).then(() => {
+                        this.mainInfo = {...this.mainInfo, ...this.storeMainInfo}
                     })
                 }
             }
