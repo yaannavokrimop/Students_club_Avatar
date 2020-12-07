@@ -9,70 +9,47 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Приглашаются к участию</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.invited" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="event.invited" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Контактное лицо</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.contact" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="event.contact" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Сторонние организаторы</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea :v-model="members.sideOrganizers" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="event.sideOrganizers" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Организаторы</span></v-col>
                         <v-col class="py-0">
-                            <v-btn depressed block class="btn-light">
-                                <v-icon class="mr-4">mdi-plus</v-icon>
-                                Добавить организатора
-                            </v-btn>
+                           <AddOrganiserDialog @addOrganiser="addOrganiser"/>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="12">
-                            <v-simple-table>
-                                <template v-slot:default>
-                                    <thead>
-                                    <tr>
-                                        <th class="text-left">
-                                            Таб. номер
-                                        </th>
-                                        <th class="text-left">
-                                            ФИО
-                                        </th>
-                                        <th class="text-left">
-                                            Роль
-                                        </th>
-                                        <th class="text-left">
-                                            Комментарий
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr
-                                            v-for="item in members.organisers"
-                                            :key="item.number"
-                                    >
-                                        <td>{{ item.number }}</td>
-                                        <td>{{ item.name }}</td>
-                                        <td>{{ item.role }}</td>
-                                        <td>{{ item.comment }}</td>
-                                    </tr>
-                                    </tbody>
-                                </template>
-                            </v-simple-table>
+                           <v-data-table
+                                   :headers="headers"
+                                   :items="event.organisers"
+                                   :items-per-page="5"
+                                   fixed-header
+                                   hide-default-footer
+                           >
+                               <template #no-data>
+                                   <span>Нет организаторов</span>
+                               </template>
+                           </v-data-table>
                         </v-col>
                     </v-row>
                 </template>
                 <template #buttons>
                     <v-container class="pt-0">
                         <v-row class="px-5" justify="end">
-                            <v-btn depressed @click="saveMembers" class="btn-accent">
+                            <v-btn depressed @click="onSave" class="btn-accent">
                                 Сохранить
                             </v-btn>
                         </v-row>
@@ -84,32 +61,53 @@
 </template>
 
 <script>
+    import { mapActions } from "vuex";
+
     import StyledCard from "../StyledCard";
+    import AddOrganiserDialog from "../Dialogs/AddOrganiserDialog";
 
     export default {
         name: "Members",
-        components: {StyledCard},
+        components: { StyledCard, AddOrganiserDialog },
 
         data: () => ({
+            id: '',
+            event: {},
             members: {
                 invited: '',
                 contact: '',
                 sideOrganizers: '',
-                organisers: [
-                    { number: '267804', name: 'Елисеева Елена Андреевна', role: 'Организатор', comment: '' },
-                    { number: '256777', name: 'Помиркованная Вера Евгеньевна', role: 'Организатор', comment: '' }
-                ],
-            }
+                organisers: [],
+            },
+            headers: [
+                { text: 'Таб. номер', value: 'number', sortable: false },
+                { text: 'ФИО', value: 'name', sortable: false },
+                { text: 'Роль', value: 'role', sortable: false },
+                { text: 'Комментарий', value: 'comment', sortable: false }
+            ],
         }),
-
         methods: {
-            saveMembers() {
-
+            ...mapActions(['getEvent', 'editEvent']),
+            onSave() {
+                this.editEvent(this.event);
+            },
+            addOrganiser(organiser){
+                this.event.organisers.push({...organiser})
+            }
+        },
+        watch: {
+            $route: {
+                immediate: true,
+                handler() {
+                    this.id = this.$route.params.id;
+                    this.getEvent(+this.id).then(event => {
+                        this.event = {...this.members, ...event};
+                    })
+                }
             }
         }
     }
 </script>
 
 <style scoped>
-
 </style>

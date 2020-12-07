@@ -4,7 +4,8 @@ const state = {
         contact: '',
         sideOrganizers: '',
         organisers: [],
-    }
+    },
+
 };
 
 const mutations = {

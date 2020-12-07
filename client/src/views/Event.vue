@@ -7,17 +7,17 @@
                         Редактирование
                     </template>
                     <template #subtitle>
-                        Выезд в приют
+                        {{event.name}}
                     </template>
                     <template #card-text>
                         <v-list class="pt-0 pb-4" :color="color" dense>
-                            <v-list-item to="/event/main" class="my-1 px-6">Основное</v-list-item>
-                            <v-list-item to="/event/characteristics" class="my-1 px-6">Характеристики</v-list-item>
-                            <v-list-item to="/event/preview" class="my-1 px-6">Анонс</v-list-item>
-                            <v-list-item to="/event/members" class="my-1 px-6">Участники</v-list-item>
-                            <v-list-item to="/event/location" class="my-1 px-6">Места проведения</v-list-item>
-                            <v-list-item to="/event/requests" class="my-1 px-6">Заявки</v-list-item>
-                            <v-list-item to="/event/resume" class="mt-1 px-6" disabled>Итоги</v-list-item>
+                            <v-list-item :to="`/event/${id}/main`" class="my-1 px-6">Основное</v-list-item>
+                            <v-list-item :to="`/event/${id}/characteristics`" class="my-1 px-6">Характеристики</v-list-item>
+                            <v-list-item :to="`/event/${id}/preview`" class="my-1 px-6">Анонс</v-list-item>
+                            <v-list-item :to="`/event/${id}/members`" class="my-1 px-6">Участники</v-list-item>
+                            <v-list-item :to="`/event/${id}/location`" class="my-1 px-6">Места проведения</v-list-item>
+                            <v-list-item :to="`/event/${id}/requests`" class="my-1 px-6">Заявки</v-list-item>
+                            <v-list-item :to="`/event/${id}/resume`" class="mt-1 px-6" disabled>Итоги</v-list-item>
                         </v-list>
                     </template>
                     <template #buttons>
@@ -25,10 +25,7 @@
                         <v-container class="">
                             <v-col class="pa-0 ma-0" align="center" justify="center">
                                 <v-btn depressed block class="btn-light">
-                                    Сохранить все
-                                </v-btn>
-                                <v-btn class="mt-2" depressed block>
-                                    Отправить в ИСУ
+                                  Отправить в ИСУ
                                 </v-btn>
                             </v-col>
                         </v-container>
@@ -46,6 +43,7 @@
 
 <script>
     import StyledCard from "../components/StyledCard";
+    import { mapGetters, mapActions } from "vuex";
 
     export default {
         name: "Event",
@@ -53,8 +51,27 @@
             StyledCard
         },
         data: () => ({
+            id: '',
+            event: {},
             color: 'rgba(246, 246, 246, 1)'
-        })
+        }),
+        computed: {
+            ...mapGetters(['currentId'])
+        },
+        methods: {
+            ...mapActions(['getEvent'])
+        },
+        watch: {
+            $route: {
+                immediate: true,
+                handler() {
+                    this.id = this.$route.params.id;
+                    this.getEvent(+this.id).then(event => {
+                        this.event = {...event};
+                    })
+                }
+            }
+        }
     }
 </script>
 
