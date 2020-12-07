@@ -20,10 +20,55 @@ create table avatar.Event (
     site varchar(255)
 );
 
-create table Characteristics (
+create table avatar.Characteristics (
     id uuid primary key,
     event_id uuid references event,
     name varchar(255) not null,
     value varchar(255) not null,
     required boolean not null
+);
+
+create table avatar.Preview (
+    event_id uuid primary key references event,
+    announcement varchar(255),
+    description varchar(255),
+    aim varchar(255),
+    tasks varchar(255),
+    participants varchar(255),
+    organisers varchar(255),
+    contact_person varchar(255),
+    comment varchar(255)
+);
+
+create table avatar.Resume (
+    event_id uuid primary key references event,
+    number_of_participants int,
+    results varchar(255),
+    short_results varchar(255)
+);
+
+create table avatar.Participants (
+    id uuid primary key,
+    isu_id varchar(6),
+    event_id uuid references event,
+    role varchar(255),
+    comment varchar(255)
+);
+
+create table avatar.Address (
+    id uuid primary key,
+    event_id uuid references event,
+    name varchar(255),
+    country varchar(255),
+    index varchar(20),
+    city varchar(255),
+    region varchar(255),
+    street varchar(255),
+    house int,
+    building int,
+    letter varchar(1),
+    room varchar(255),
+    date_start date,
+    date_finish date,
+    comment varchar(255)
 );

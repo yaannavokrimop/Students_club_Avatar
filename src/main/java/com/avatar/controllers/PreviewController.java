@@ -24,4 +24,14 @@ public class PreviewController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Мероприятие не найдено.");
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity changePreview(@PathVariable("id") UUID eventId, @RequestBody PreviewDto previewDto) {
+        try {
+            previewService.changePreview(eventId, previewDto);
+            return ResponseEntity.ok("Изменения сохранены успешно.");
+        } catch (NullPointerException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Мероприятие не найдено.");
+        }
+    }
 }

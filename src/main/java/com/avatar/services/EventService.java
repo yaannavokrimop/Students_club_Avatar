@@ -47,7 +47,7 @@ public class EventService {
     public Event updateEventMainInfo(EventDto eventDto, UUID eventId) {
         Event dbEvent = eventRepo.findById(eventId).orElseThrow(NullPointerException::new);
         Event inputEvent = EventMapper.INSTANCE.EventDtoToEvent(eventDto);
-        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preRelease");
+        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preview");
         return eventRepo.save(dbEvent);
     }
 

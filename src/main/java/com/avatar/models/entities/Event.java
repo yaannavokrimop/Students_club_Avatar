@@ -2,6 +2,7 @@ package com.avatar.models.entities;
 
 import com.avatar.models.enums.EventStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -48,13 +49,14 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
 
-    //private String site;
+    private String site;
 
     /*@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Characteristic> characteristics;*/
 
-    /*@OneToOne(mappedBy = "event", orphanRemoval = true)
-    private Preview preview;*/
+    @JsonIgnore
+    @OneToOne(mappedBy = "event", orphanRemoval = true)
+    private Preview preview;
 
     public Event(String name, Date dateFrom, Date dateTo, boolean isDateApproximate) {
         this.name = name;

@@ -30,6 +30,7 @@ public class Preview {
     private String comment;
 
     public Preview (Event event) {
+        this.eventId = event.getId();
         this.event = event;
     }
 }
