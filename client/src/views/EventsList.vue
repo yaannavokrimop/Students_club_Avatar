@@ -79,7 +79,7 @@ export default {
       this.deleteEvent(item.id);
     }
   }
-  /*created: function () {
+ /* created: function () {
       HTTP.get('/event/all').then((response) => {
           this.events = response.data;
       }).catch(error => console.log(error));

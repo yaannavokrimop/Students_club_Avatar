@@ -24,12 +24,13 @@ public class EventService {
     private final EventRepo eventRepo;
 
     public UUID create(EventDto eventDto) {
-        Event event = new Event();
+        Event event = EventMapper.INSTANCE.EventDtoToEvent(eventDto);
+//        Event event = new Event();
         event.setEventStatus(EventStatus.DRAFT);
-        event.setName(eventDto.getName());
-        event.setDateTimeStart(eventDto.getDateFrom());
-        event.setDateTimeFinish(eventDto.getDateTo());
-        event.setDateApproximate(eventDto.isDateFlag());
+//        event.setName(eventDto.getName());
+//        event.setDateTimeStart(eventDto.getDateFrom());
+//        event.setDateTimeFinish(eventDto.getDateTo());
+//        event.setDateApproximate(eventDto.isDateFlag());
         return eventRepo.save(event).getId();
     }
 

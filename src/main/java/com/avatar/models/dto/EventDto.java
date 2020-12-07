@@ -20,9 +20,9 @@ public class EventDto {
     private String status;
     private String type;
     private String typeOfActivity;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateFrom;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateTo;
     private boolean dateFlag;
     private EventStatus eventStatus;

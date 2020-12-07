@@ -124,7 +124,7 @@ export default {
     menuDateTo: false,
   }),
   computed: {
-    ...mapGetters(['required', 'eventShortEmpty']),
+    ...mapGetters(['required', 'eventShortEmpty', 'id']),
   },
   methods: {
     ...mapActions(['createEvent']),
@@ -132,10 +132,10 @@ export default {
       if (this.$refs.form.validate()) {
         //this.$store.dispatch('createEvent', this.eventShort);
         this.eventShort.systemStatus = 'draft';
-        this.createEvent(this.eventShort).then(id => {
+        this.createEvent(this.eventShort).then(() => {
           this.visible = false;
           this.$refs.form.reset();
-          this.$router.push({name: 'event', params: {id}});
+          this.$router.push({name: 'event', params: {id:this.id}});
         });
       }
     }
