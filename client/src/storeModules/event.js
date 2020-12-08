@@ -60,7 +60,7 @@ const mutations = {
 
 const actions = {
     createEvent({ commit }, event) {
-        HTTP
+        return HTTP
             .post('/event/create', event)
             .then((response) => {
                 console.log('Event created successfully');
@@ -95,12 +95,16 @@ const actions = {
 
     deleteEvent({ commit }, id){
         commit('DELETE_EVENT', id);
+    },
+
+    clearEvent({ commit }){
+        commit('CLEAR_MAININFO')
     }
 
 };
 
 const getters = {
-    storeId: state => state.id,
+    id: state => state.id,
     events: state => state.events,
     currentId: state => state.currentId,
     eventShortEmpty: state => state.eventShortEmpty,

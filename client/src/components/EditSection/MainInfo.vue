@@ -236,12 +236,20 @@
             $route: {
                 immediate: true,
                 handler() {
-                    this.id = this.$route.params.id;
-                    this.getMainInfo(this.id).then(() => {
-                        this.mainInfo = {...this.mainInfo, ...this.storeMainInfo};
-                    })
+                    if (JSON.stringify(this.storeMainInfo) === JSON.stringify(this.mainInfo)){
+                        this.id = this.$route.params.id;
+                        this.getMainInfo(this.id).then(() => {
+                            this.mainInfo = {...this.mainInfo, ...this.storeMainInfo};
+                        })
+                    }
+                    else {
+                        this.mainInfo = {...this.storeMainInfo}
+                    }
                 }
-            }
+            },
+            /*storeMainInfo() {
+                this.mainInfo = {...this.storeMainInfo}
+            }*/
         }
     }
 </script>
