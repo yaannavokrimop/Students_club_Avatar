@@ -50,12 +50,12 @@ public class EventController {
         }
     }
 
-    @PostMapping("/search")
+    /*@PostMapping("/search")
     public ResponseEntity<List<EventDto>> getEventList(@RequestBody SearchParam params) {
         Page<Event> eventPage = eventService.getPageOfEvents(params);
         List<EventDto> eventDtoList= eventService.transformToEventDtoList(eventPage.getContent());
         return ResponseEntity.ok(eventDtoList);
-    }
+    }*/
 
     @PutMapping("/mainInfo/{id}")
     public ResponseEntity<String> updateEventMainInfo (@RequestBody EventDto inputEvent, @PathVariable("id") UUID eventId) {

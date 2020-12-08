@@ -26,7 +26,7 @@
               >
                 mdi-pencil
               </v-icon>
-              <v-icon v-if="item.systemStatus === 'draft'"
+              <v-icon v-if="item.systemStatus === 'DRAFT'"
                   @click="deleteItem(item)"
               >
                 mdi-delete
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-//import {HTTP} from "@/http-common";
+// import {HTTP} from "@/http-common";
 import {mapGetters, mapActions } from "vuex";
 
 import StyledCard from "@/components/StyledCard";
@@ -61,7 +61,7 @@ export default {
   }),
   computed: {...mapGetters(['events'])},
   methods: {
-    ...mapActions(['deleteEvent']),
+    ...mapActions(['deleteEvent', 'getEvents']),
     getColor (status) {
       switch (status) {
         case 'draft': return 'grey'
@@ -69,7 +69,8 @@ export default {
     },
     getStatusLabel (status) {
       switch (status) {
-        case 'draft': return 'Черновик'
+        case 'draft': return 'Черновик';
+          case 'DRAFT':return 'Черновик'
       }
     },
     editItem (item){
@@ -78,12 +79,10 @@ export default {
     deleteItem (item){
       this.deleteEvent(item.id);
     }
+  },
+  created: function () {
+      this.getEvents();
   }
- /* created: function () {
-      HTTP.get('/event/all').then((response) => {
-          this.events = response.data;
-      }).catch(error => console.log(error));
-  }*/
 }
 </script>
 

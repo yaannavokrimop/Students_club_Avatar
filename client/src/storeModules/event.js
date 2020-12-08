@@ -34,12 +34,16 @@ const mutations = {
     SET_ID (state, id) {
         state.id = id;
     },
-
-    ADD_EVENT(state, event) {
-        state.events.push({...event, id: state.nextId});
-        state.currentId = state.nextId;
-        state.nextId++;
+    SET_EVENTS(state, events) {
+        state.events = events;
     },
+
+    // ADD_EVENT(state, event) {
+    //     state.events.push({...event, id: state.nextId});
+    //     state.currentId = state.nextId;
+    //     state.nextId++;
+    // },
+
     EDIT_EVENT(state, event){
         const index = state.events.findIndex(x => x.id === event.id);
         if (index > -1){
@@ -65,17 +69,25 @@ const actions = {
             .catch(error => console.error(error))
     },
 
+    getEvents({commit}, ) {
+        HTTP
+            .get('/event/all')
+            .then((response) => {
+                commit("SET_EVENTS", response.data);
+        }).catch(error => console.log(error));
+    },
+
    /* createEvent({ commit }, event) {
         commit('ADD_EVENT', event);
         return state.currentId;
     },*/
 
-    getEvent(context, id){
-        const index = state.events.findIndex(x => x.id === id);
-        if (index > -1){
-            return state.events[index]
-        }
-    },
+    // getEvent(context, id){
+    //     const index = state.events.findIndex(x => x.id === id);
+    //     if (index > -1){
+    //         return state.events[index]
+    //     }
+    // },
 
     editEvent({ commit }, newEvent){
         commit('EDIT_EVENT', newEvent);
@@ -88,10 +100,11 @@ const actions = {
 };
 
 const getters = {
-    id: state => state.id,
+    storeId: state => state.id,
     events: state => state.events,
     currentId: state => state.currentId,
     eventShortEmpty: state => state.eventShortEmpty,
+    storeName: state => state.name,
 
     buildings: state => state.buildings,
     rooms: state => state.rooms

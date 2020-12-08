@@ -55,7 +55,7 @@ public class Event {
     private List<Characteristic> characteristics;*/
 
     @JsonIgnore
-    @OneToOne(mappedBy = "event", orphanRemoval = true)
+    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private Preview preview;
 
     public Event(String name, Date dateFrom, Date dateTo, boolean isDateApproximate) {

@@ -9,42 +9,42 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Краткое описание</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.shortDescription" placeholder="Краткое описание" rows="1" dense
+                            <v-textarea v-model="storePreview.shortDescription" placeholder="Краткое описание" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Описание</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.description" placeholder="Описание" rows="1" dense
+                            <v-textarea v-model="preview.description" placeholder="Описание" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Цель</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.purpose" placeholder="Цель" rows="1" dense
+                            <v-textarea v-model="preview.purpose" placeholder="Цель" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Задачи</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.tasks" placeholder="Задачи" rows="1" dense
+                            <v-textarea v-model="preview.tasks" placeholder="Задачи" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Сайт</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.site" placeholder="Сайт" rows="1" dense
+                            <v-textarea v-model="preview.site" placeholder="Сайт" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Комментарий</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.comment" placeholder="Комментарий" rows="1" dense
+                            <v-textarea v-model="preview.comment" placeholder="Комментарий" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
@@ -125,7 +125,7 @@
 
 <script>
     import StyledCard from "../StyledCard";
-    import { mapActions } from "vuex";
+    import { mapActions, mapGetters } from "vuex";
     export default {
         name: "Preview",
         components: {StyledCard},
@@ -142,10 +142,13 @@
             event: {},
             color: 'rgba(246, 246, 246, 1)'
         }),
+        computed: {
+            ...mapGetters(['storePreview']),
+        },
         methods: {
-            ...mapActions(['getEvent', 'editEvent']),
+            ...mapActions(['getPreview', 'updatePreview']),
             onSave() {
-                this.editEvent(this.event);
+                this.updatePreview(this.id, this.preview);
             }
         },
         watch: {
@@ -153,9 +156,12 @@
                 immediate: true,
                 handler() {
                     this.id = this.$route.params.id;
-                    this.getEvent(+this.id).then(event => {
-                        this.event = {...this.preview, ...event};
+                    this.getPreview(this.id).then(() => {
+                        this.preview = {...this.preview, ...this.storePreview};
                     })
+                    // this.getEvent(+this.id).then(event => {
+                    //     this.event = {...this.preview, ...event};
+                    // })
                 }
             }
         }

@@ -7,7 +7,7 @@
                         Редактирование
                     </template>
                     <template #subtitle>
-                        {{event.name}}
+<!--                        {{event.name}}-->
                     </template>
                     <template #card-text>
                         <v-list class="pt-0 pb-4" :color="color" dense>
@@ -43,7 +43,7 @@
 
 <script>
     import StyledCard from "../components/StyledCard";
-    import { mapGetters, mapActions } from "vuex";
+    import { mapGetters } from "vuex";
 
     export default {
         name: "Event",
@@ -52,23 +52,23 @@
         },
         data: () => ({
             id: '',
-            event: {},
+            // event: {},
             color: 'rgba(246, 246, 246, 1)'
         }),
         computed: {
             ...mapGetters(['currentId'])
         },
         methods: {
-            ...mapActions(['getEvent'])
+            // ...mapActions(['getEvent'])
         },
         watch: {
             $route: {
                 immediate: true,
                 handler() {
                     this.id = this.$route.params.id;
-                    this.getEvent(+this.id).then(event => {
-                        this.event = {...event};
-                    })
+                    // this.getEvent(+this.id).then(event => {
+                    //     this.event = {...event};
+                    // })
                 }
             }
         }

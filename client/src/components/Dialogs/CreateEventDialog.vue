@@ -124,14 +124,15 @@ export default {
     menuDateTo: false,
   }),
   computed: {
-    ...mapGetters(['required', 'eventShortEmpty', 'id']),
+    ...mapGetters(['id', 'required', 'eventShortEmpty']),
   },
   methods: {
     ...mapActions(['createEvent']),
     onCreateEvent() {
       if (this.$refs.form.validate()) {
+          console.log('hi'+this.id);
         //this.$store.dispatch('createEvent', this.eventShort);
-        this.eventShort.systemStatus = 'draft';
+        // this.eventShort.systemStatus = 'draft';
         this.createEvent(this.eventShort).then(() => {
           this.visible = false;
           this.$refs.form.reset();

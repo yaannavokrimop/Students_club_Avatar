@@ -16,7 +16,7 @@ public class Preview {
     private UUID eventId;
 
     @MapsId
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "event_id")
     private Event event;
 

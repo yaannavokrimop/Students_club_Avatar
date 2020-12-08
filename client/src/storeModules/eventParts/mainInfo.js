@@ -21,14 +21,14 @@ const mutations = {
 const actions = {
     getMainInfo({ commit }, id){
         HTTP
-            .get('/event/mainInfo' + id)
+            .get('/event/mainInfo/' + id)
             .then((response) => {
                 commit("SET_MAININFO", response.data);
             })
             .catch(error => console.error(error));
     },
 
-    putMainInfo({ id, mainInfo }){
+    putMainInfo({id, mainInfo}){
         HTTP
             .put('event/mainInfo/' + id, mainInfo)
             .then(() => console.log('Main info saved successfully'))

@@ -2,6 +2,7 @@ package com.avatar.models.dto;
 
 import com.avatar.models.enums.EventStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class EventDto {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateTo;
     private boolean dateFlag;
-    private EventStatus eventStatus;
+    private EventStatus systemStatus;
 
     public EventDto(String name, Date dateTimeStart, Date dateTimeFinish, boolean dateFlag) {
         this.name = name;

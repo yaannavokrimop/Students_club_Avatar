@@ -9,14 +9,14 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Название</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.name" placeholder="Название" rows="1" dense
+                            <v-textarea v-model="storeMainInfo.name" placeholder="Название" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Краткое название</span></v-col>
                         <v-col class="py-0">
-                            <v-text-field v-model="event.shortName" placeholder="Краткое название" dense
+                            <v-text-field v-model="mainInfo.shortName" placeholder="Краткое название" dense
                                           outlined></v-text-field>
                         </v-col>
                     </v-row>
@@ -30,7 +30,7 @@
                                     offset-y
                                     min-width="290px">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="event.dateFrom"
+                                    <v-text-field v-model="mainInfo.dateFrom"
                                                   placeholder="Начало"
                                                   readonly
                                                   outlined
@@ -38,14 +38,14 @@
                                                   v-bind="attrs"
                                                   v-on="on"></v-text-field>
                                 </template>
-                                <v-date-picker v-model="event.dateFrom"
+                                <v-date-picker v-model="mainInfo.dateFrom"
                                                @input="menuDateFrom = false"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="4" class="py-0">
                             <v-text-field outlined
                                           dense
-                                          v-model="event.timeFrom"
+                                          v-model="mainInfo.timeFrom"
                                           placeholder="Время"
                                           type="time"></v-text-field>
                         </v-col>
@@ -60,7 +60,7 @@
                                     offset-y
                                     min-width="290px">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field v-model="event.dateTo"
+                                    <v-text-field v-model="mainInfo.dateTo"
                                                   placeholder="Окончание"
                                                   readonly
                                                   outlined
@@ -68,14 +68,14 @@
                                                   v-bind="attrs"
                                                   v-on="on"></v-text-field>
                                 </template>
-                                <v-date-picker v-model="event.dateTo"
+                                <v-date-picker v-model="mainInfo.dateTo"
                                                @input="menuDateTo = false"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="4" class="py-0">
                             <v-text-field outlined
                                           dense
-                                          v-model="event.timeTo"
+                                          v-model="mainInfo.timeTo"
                                           placeholder="Время"
                                           type="time"></v-text-field>
                         </v-col>
@@ -84,7 +84,7 @@
                         <v-col cols="4" class="pt-2"></v-col>
                         <v-col class="py-0">
                             <v-switch
-                                    v-model="event.dateFlag"
+                                    v-model="mainInfo.dateFlag"
                                     label="Примерные сроки"
                             ></v-switch>
                         </v-col>
@@ -92,7 +92,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Статус</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.status"
+                            <v-autocomplete v-model="mainInfo.status"
                                             :items="['Ведомственный', 'Всероссийский', 'Городской', 'Групповой', 'Кафедральный', 'Межвузовский', 'Международный', 'Общественный']"
                                             placeholder="Статус" dense outlined></v-autocomplete>
                         </v-col>
@@ -100,7 +100,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Тип</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.type"
+                            <v-autocomplete v-model="mainInfo.type"
                                             :items="['Акция', 'Вебинар', 'Вечер', 'Дебаты', 'Заседание', 'Игра', 'Митап', 'Семинар']"
                                             placeholder="Тип" dense outlined></v-autocomplete>
                         </v-col>
@@ -108,7 +108,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Вид деятельности</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.typeOfActivity"
+                            <v-autocomplete v-model="mainInfo.typeOfActivity"
                                             :items="['Бизнес', 'Внеучебная', 'Карьера', 'Международная', 'Наука и инновации', 'Образование', 'Проектная', 'Социальная']"
                                             placeholder="Вид деятельности" dense outlined></v-autocomplete>
                         </v-col>
@@ -213,7 +213,7 @@
                 timeTo: '',
                 dateFlag: false,
             },
-            event: {},
+            // event: {},
             id: '',
             menuDateFrom: false,
             menuDateTo: false,
@@ -224,12 +224,12 @@
           ...mapGetters(['storeMainInfo'])
       },
         methods: {
-            ...mapActions(['editEvent', 'getMainInfo']),
+            ...mapActions(['putMainInfo', 'getMainInfo']),
             toggleHelp() {
                 this.showHelp = !this.showHelp
             },
             onSave(){
-                this.editEvent(this.event);
+                // this.putMainInfo(this.id, this.mainInfo);
             }
         },
         watch: {
@@ -237,8 +237,8 @@
                 immediate: true,
                 handler() {
                     this.id = this.$route.params.id;
-                    this.getMainInfo(+this.id).then(() => {
-                        this.mainInfo = {...this.mainInfo, ...this.storeMainInfo}
+                    this.getMainInfo(this.id).then(() => {
+                        this.mainInfo = {...this.mainInfo, ...this.storeMainInfo};
                     })
                 }
             }
