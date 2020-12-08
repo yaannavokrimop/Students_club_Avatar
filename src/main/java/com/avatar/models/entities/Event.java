@@ -1,11 +1,9 @@
 package com.avatar.models.entities;
 
 import com.avatar.models.enums.EventStatus;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -58,9 +56,13 @@ public class Event {
     @OneToOne(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private Preview preview;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Participant> participants;
+
     public Event(String name, Date dateFrom, Date dateTo, boolean isDateApproximate) {
         this.name = name;
         this.dateTimeStart = dateFrom;
         this.dateTimeFinish = dateTo;
+        this.isDateApproximate = isDateApproximate;
     }
 }

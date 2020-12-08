@@ -27,9 +27,9 @@ public interface PreviewMapper {
 
 
     @Mapping(source = "event", target = "event")
-//    @Mapping(source = "", target = "participants")
+    @Mapping(source = "event.preview.participants", target = "participants")
 //    @Mapping(source = "", target = "organisers")
-//    @Mapping(source = "event.id", target = "eventId")
+    @Mapping(source = "event.id", target = "eventId")
 //    @Mapping(source = "", target = "contactPerson")
     @Mapping(source = "dto.shortDescription", target = "announcement")
     @Mapping(source = "dto.purpose", target = "aim")
