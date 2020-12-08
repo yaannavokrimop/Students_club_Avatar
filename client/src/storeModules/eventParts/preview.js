@@ -22,7 +22,7 @@ const mutations = {
 
 const actions = {
     getPreview({commit}, id) {
-        HTTP
+        return HTTP
             .get('/preview/' + id)
             .then((response) => {
                 commit("SET_PREVIEW", response.data);

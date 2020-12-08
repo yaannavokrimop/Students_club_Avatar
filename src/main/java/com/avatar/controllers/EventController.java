@@ -6,6 +6,7 @@ import com.avatar.models.entities.Event;
 import com.avatar.services.DateService;
 import com.avatar.services.EventService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

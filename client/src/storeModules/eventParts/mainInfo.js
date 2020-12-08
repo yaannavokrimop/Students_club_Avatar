@@ -1,29 +1,48 @@
 import { HTTP } from "@/http-common";
 
 const state = {
-    storeMainInfo: {
+    mainInfo: {
         name: '',
         shortName: '',
         status: '',
         type: '',
         typeOfActivity: '',
         dateFrom: '',
-        dateTo: ''
+        dateTo: '',
+        timeFrom: '',
+        timeTo: '',
+        dateFlag: false,
+    },
+    clearMainInfo: {
+        name: '',
+        shortName: '',
+        status: '',
+        type: '',
+        typeOfActivity: '',
+        dateFrom: '',
+        dateTo: '',
+        timeFrom: '',
+        timeTo: '',
+        dateFlag: false,
     }
 };
 
 const mutations = {
     SET_MAININFO (state, mainInfo) {
-        state.storeMainInfo = mainInfo;
+        state.mainInfo = {...mainInfo};
+    },
+    CLEAR_MAININFO (state) {
+        state.mainInfo = {...state.clearMainInfo}
     }
 };
 
 const actions = {
     getMainInfo({ commit }, id){
-        HTTP
+        return HTTP
             .get('/event/mainInfo/' + id)
             .then((response) => {
                 commit("SET_MAININFO", response.data);
+                //return (response.data);
             })
             .catch(error => console.error(error));
     },
@@ -37,7 +56,7 @@ const actions = {
 };
 
 const getters = {
-    storeMainInfo: state => state.storeMainInfo
+    storeMainInfo: state => state.mainInfo
 };
 
 export default {

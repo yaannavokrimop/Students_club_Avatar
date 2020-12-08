@@ -27,7 +27,7 @@
 
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
-            <v-list-item to="/eventsList" class="my-2" :ripple="false">
+            <v-list-item to="/eventsList" @click="clearEvent" class="my-2" :ripple="false">
                 <v-list-item-icon v-on="on">
                     <v-icon color="white">mdi-format-list-bulleted-square</v-icon>
                 </v-list-item-icon>
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
     import CreateEventDialog from "./Dialogs/CreateEventDialog";
     export default {
         name: "SideBar",
@@ -70,6 +71,7 @@
         }),
         components: { CreateEventDialog },
         methods: {
+            ...mapActions(['clearEvent']),
             onCreateEvent(){
                 this.dialogVisible = !this.dialogVisible;
             }

@@ -7,9 +7,8 @@
           <v-data-table
               :headers="headers"
               :items="events"
-              :items-per-page="5"
+              :items-per-page="25"
               fixed-header
-              hide-default-footer
           >
             <template v-slot:item.systemStatus="{ item }">
               <v-chip

@@ -9,24 +9,23 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name="characteristics")
+@Table(name = "participants")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Characteristic {
+public class Participant {
     @Id
     @GeneratedValue
     @JsonIgnore
     private UUID id;
 
+    private String isuId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="event_id")
+    @JsonIgnore
     private Event event;
 
-    private String name;
-
-    private String value;
-
-    private boolean required;
+    private String role;
+    private String comment;
 }
-
