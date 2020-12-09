@@ -127,7 +127,7 @@ export default {
     ...mapGetters(['id', 'required', 'eventShortEmpty']),
   },
   methods: {
-    ...mapActions(['createEvent']),
+    ...mapActions(['clearEvent', 'createEvent']),
     onCreateEvent() {
       if (this.$refs.form.validate()) {
           console.log('hi'+this.id);
