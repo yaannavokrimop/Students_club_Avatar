@@ -52,7 +52,6 @@ public class Event {
     /*@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Characteristic> characteristics;*/
 
-    @JsonIgnore
     @OneToOne(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private Preview preview;
 

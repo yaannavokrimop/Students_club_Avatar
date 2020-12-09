@@ -47,10 +47,14 @@ const actions = {
             .catch(error => console.error(error));
     },
 
-    putMainInfo({id, mainInfo}){
+    putMainInfo( {commit },{id, mainInfo}){
+        console.log(mainInfo);
         HTTP
-            .put('event/mainInfo/' + id, mainInfo)
-            .then(() => console.log('Main info saved successfully'))
+            .post('event/mainInfo/' + id, mainInfo)
+            .then(() => {
+                commit("SET_MAINIFO", mainInfo);
+                console.log('Main info saved successfully')
+            })
             .catch(error => console.error(error))
     }
 };

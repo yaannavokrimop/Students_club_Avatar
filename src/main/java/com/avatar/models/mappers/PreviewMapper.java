@@ -1,14 +1,11 @@
 package com.avatar.models.mappers;
 
-import com.avatar.models.dto.EventDto;
 import com.avatar.models.dto.PreviewDto;
 import com.avatar.models.entities.Event;
 import com.avatar.models.entities.Preview;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-
-import java.util.UUID;
 
 @Mapper
 public interface PreviewMapper {
