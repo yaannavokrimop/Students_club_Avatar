@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "participants")
 @Data
+@ToString(exclude = "event")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Participant {
@@ -26,6 +28,7 @@ public class Participant {
     @JsonIgnore
     private Event event;
 
+    private String name;
     private String role;
     private String comment;
 }

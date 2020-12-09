@@ -14,5 +14,5 @@ public class MemberDto {
     private String invited;
     private String contact;
     private String sideOrganizers;
-    private List<Participant> organisers;
+    private List<ParticipantDto> organisers;
 }

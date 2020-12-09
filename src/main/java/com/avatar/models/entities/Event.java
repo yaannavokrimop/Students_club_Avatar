@@ -4,6 +4,7 @@ import com.avatar.models.enums.EventStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@ToString(exclude = {"preview", "participants"})
 @NoArgsConstructor
 public class Event {
     @Id

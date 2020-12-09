@@ -11,21 +11,21 @@
               <v-toolbar height="40" flat>
                 <v-row>
                   <AddLocationDialog @addLocation="addLocation" :askForData="multipleDays"/>
-                  <v-btn v-if="event.locations.length" depressed @click="onSave" class="btn-accent ml-4">
+                  <v-btn v-if="locations.length" depressed @click="onSave" class="btn-accent ml-4">
                     Сохранить
                   </v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn v-if="event.locations.length" fab text small color="grey darken-2" @click="prev">
+                  <v-btn v-if="locations.length" fab text small color="grey darken-2" @click="prev">
                     <v-icon small>
                       mdi-chevron-left
                     </v-icon>
                   </v-btn>
-                  <v-btn v-if="event.locations.length" fab text small color="grey darken-2" @click="next" class="mr-3">
+                  <v-btn v-if="locations.length" fab text small color="grey darken-2" @click="next" class="mr-3">
                     <v-icon small>
                       mdi-chevron-right
                     </v-icon>
                   </v-btn>
-                  <v-menu v-if="event.locations.length" bottom right>
+                  <v-menu v-if="locations.length" bottom right>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn class="btn-light mr-5"
                              depressed

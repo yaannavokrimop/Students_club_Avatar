@@ -1,7 +1,7 @@
 package com.avatar.models.mappers;
 
 import com.avatar.models.dto.MemberDto;
-import com.avatar.models.entities.Participant;
+import com.avatar.models.dto.ParticipantDto;
 import com.avatar.models.entities.Preview;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,5 +17,5 @@ public interface MemberMapper {
     @Mapping(source = "preview.contactPerson", target = "contact")
     @Mapping(source = "preview.organisers", target = "sideOrganizers")
     @Mapping(source = "participants", target = "organisers")
-    MemberDto ParticipantToMemberDto (Preview preview, List<Participant> participants);
+    MemberDto ParticipantToMemberDto (Preview preview, List<ParticipantDto> participants);
 }

@@ -110,6 +110,7 @@ const actions = {
         commit('CLEAR_MAININFO');
         commit('CLEAR_PREVIEW');
         commit('CLEAR_NAME');
+        commit('CLEAR_MEMBERS');
     }
 
 };
