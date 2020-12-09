@@ -74,6 +74,7 @@ import {mapActions} from 'vuex';
             ...mapActions(['clearEvent']),
             onCreateEvent(){
                 this.dialogVisible = !this.dialogVisible;
+                //this.clearEvent();
             }
         }
     }

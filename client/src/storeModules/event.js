@@ -98,7 +98,7 @@ const actions = {
     },
 
     clearEvent({ commit }){
-        commit('CLEAR_MAININFO')
+        commit('CLEAR_MAININFO', null, { root: true })
     }
 
 };
