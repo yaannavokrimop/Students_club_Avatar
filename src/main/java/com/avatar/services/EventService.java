@@ -47,11 +47,6 @@ public class EventService {
         String timeFrom = dateService.extractTime(event.getDateTimeStart());
         String timeTo = dateService.extractTime(event.getDateTimeFinish());
         EventMainInfoDto eventMainInfoDto = EventMainInfoMapper.INSTANCE.EventToEventMainInfoDto(event, dateFrom, dateTo, timeFrom, timeTo);
-//        EventDto eventDto = transformToEventDto(event);
-//        eventDto.setShortName(event.getShortName());
-//        eventDto.setStatus(event.getStatus());
-//        eventDto.setType(event.getType());
-//        eventDto.setTypeOfActivity(event.getActivityType());
         return eventMainInfoDto;
     }
 
@@ -92,6 +87,11 @@ public class EventService {
             return eventRepo.findAllByParamsAndDateTimeFinish(eventStatuses, dateStart, params.getDateFinish(), organiserId, Pageable.unpaged());
         }
 
+    }
+
+    public void deleteEvent(UUID eventId) {
+        Event event = eventRepo.findById(eventId).orElseThrow(NullPointerException::new);
+        if (event.getEventStatus().equals(EventStatus.DRAFT))  eventRepo.delete(event);
     }
 
     public List<EventDto> transformToEventDtoList(List<Event> eventList) {

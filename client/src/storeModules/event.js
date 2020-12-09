@@ -1,4 +1,4 @@
-import { HTTP } from "@/http-common";
+import {HTTP} from "@/http-common";
 
 const state = {
     eventShortEmpty: {
@@ -32,7 +32,7 @@ const state = {
 };
 
 const mutations = {
-    SET_ID (state, id) {
+    SET_ID(state, id) {
         state.id = id;
     },
     SET_NAME(state, name) {
@@ -47,28 +47,22 @@ const mutations = {
         state.name = '';
     },
 
-    // ADD_EVENT(state, event) {
-    //     state.events.push({...event, id: state.nextId});
-    //     state.currentId = state.nextId;
-    //     state.nextId++;
-    // },
-
-    EDIT_EVENT(state, event){
+    EDIT_EVENT(state, event) {
         const index = state.events.findIndex(x => x.id === event.id);
-        if (index > -1){
+        if (index > -1) {
             state.events[index] = {...state.events[index], ...event}
         }
     },
     DELETE_EVENT(state, id) {
         const index = state.events.findIndex(x => x.id === id);
-        if (index > -1){
+        if (index > -1) {
             state.events.splice(index, 1);
         }
     }
 };
 
 const actions = {
-    createEvent({ commit }, event) {
+    createEvent({commit}, event) {
         return HTTP
             .post('/event/create', event)
             .then((response) => {
@@ -78,35 +72,28 @@ const actions = {
             .catch(error => console.error(error))
     },
 
-    getEvents({commit}, ) {
+    getEvents({commit},) {
         HTTP
             .get('/event/all')
             .then((response) => {
                 commit("SET_EVENTS", response.data);
-        }).catch(error => console.log(error));
+            }).catch(error => console.log(error));
     },
 
-        /* createEvent({ commit }, event) {
-         commit('ADD_EVENT', event);
-         return state.currentId;
-     },*/
-
-    // getEvent(context, id){
-    //     const index = state.events.findIndex(x => x.id === id);
-    //     if (index > -1){
-    //         return state.events[index]
-    //     }
-    // },
-
-    editEvent({ commit }, newEvent){
+    editEvent({commit}, newEvent) {
         commit('EDIT_EVENT', newEvent);
     },
 
-    deleteEvent({ commit }, id){
-        commit('DELETE_EVENT', id);
+    deleteEvent({commit}, id) {
+        HTTP
+            .post('/event/delete/' + id)
+            .then(() => {
+                commit('DELETE_EVENT', id);
+                console.log('Event deleted successfully');
+            }).catch(error => console.log(error));
     },
 
-    clearEvent({ commit }){
+    clearEvent({commit}) {
         commit('CLEAR_MAININFO');
         commit('CLEAR_PREVIEW');
         commit('CLEAR_NAME');
