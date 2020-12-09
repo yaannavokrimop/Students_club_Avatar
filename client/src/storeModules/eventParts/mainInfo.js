@@ -48,12 +48,13 @@ const actions = {
             .catch(error => console.error(error));
     },
 
-    putMainInfo( {commit },{id, mainInfo}){
+    putMainInfo( { commit, dispatch },{id, mainInfo}){
         return HTTP
             .post('event/mainInfo/' + id, mainInfo)
             .then(() => {
                 commit("SET_MAININFO", mainInfo);
-                console.log('Main info saved successfully')
+                console.log('Main info saved successfully');
+                dispatch("showMessage", "Успешно сохранено")
             })
             .catch(error => console.error(error))
     }

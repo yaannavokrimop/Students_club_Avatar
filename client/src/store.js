@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import validation from './storeModules/validation'
+import validation from './storeModules/validation';
+import messages from "@/storeModules/messages";
 
 import event from './storeModules/event';
 import characteristics from "./storeModules/eventParts/characteristics";
@@ -15,6 +16,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     modules: {
         validation,
+        messages,
         event,
         characteristics,
         location,
