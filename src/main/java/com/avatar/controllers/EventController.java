@@ -62,6 +62,16 @@ public class EventController {
         }
     }
 
+    @PostMapping("/delete/{id}")
+    public ResponseEntity deleteEvent(@PathVariable("id") UUID eventId) {
+        try {
+            eventService.deleteEvent(eventId);
+            return ResponseEntity.ok("Черновик удалён.");
+        }catch (NullPointerException ex) {
+            return ResponseEntity.badRequest().body("Такого мероприятия нет.");
+        }
+    }
+
     /*@PostMapping("/search")
     public ResponseEntity<List<EventDto>> getEventList(@RequestBody SearchParam params) {
         Page<Event> eventPage = eventService.getPageOfEvents(params);
