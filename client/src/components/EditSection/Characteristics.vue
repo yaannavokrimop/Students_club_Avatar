@@ -9,14 +9,14 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="py-0"><span>Количество участников (план)</span></v-col>
                         <v-col class="py-0">
-                            <v-text-field v-model="event.membersNumber" placeholder="Количество участников" dense
+                            <v-text-field v-model="charact.membersNumber" placeholder="Количество участников" dense
                                           outlined></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Периодичность</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.periodicity"
+                            <v-autocomplete v-model="charact.periodicity"
                                             :items="['Ежегодные', 'Ежеквартальные', 'Ежемесячные', 'Интенсивные', 'Прочие мероприятия', 'Разовые', 'Семестровые', 'Юбилейные']"
                                             placeholder="Периодичность" dense outlined></v-autocomplete>
                         </v-col>
@@ -24,7 +24,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Категория</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.category"
+                            <v-autocomplete v-model="charact.category"
                                             :items="['Внутреннее', 'В РФ', 'За рубежом', 'МООС']"
                                             placeholder="Категория" dense outlined></v-autocomplete>
                         </v-col>
@@ -32,7 +32,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Публичность</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.publicity"
+                            <v-autocomplete v-model="charact.publicity"
                                             :items="['Открытое', 'Закрытое']"
                                             placeholder="Публичность" dense outlined></v-autocomplete>
                         </v-col>
@@ -40,7 +40,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Формат проведения</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.format"
+                            <v-autocomplete v-model="charact.format"
                                             :items="['Очно', 'Онлайн', 'Смешанные']"
                                             placeholder="Формат проведения" dense outlined></v-autocomplete>
                         </v-col>
@@ -48,7 +48,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="py-0"><span>Основной язык проведения</span></v-col>
                         <v-col class="py-0">
-                            <v-autocomplete v-model="event.language"
+                            <v-autocomplete v-model="charact.language"
                                             :items="[ 'Русский', 'Английский', 'Русский + Английский', 'Испанский', 'Итальянский', 'Казахский', 'Китайский', 'Немецкий', 'Польский', 'Украинский', 'Французский' ]"
                                             placeholder="Основной язык проведения" dense outlined></v-autocomplete>
                         </v-col>
@@ -136,7 +136,7 @@
 
 <script>
     import StyledCard from "../StyledCard";
-    import {mapActions} from "vuex";
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         name: "Characteristics",
@@ -151,23 +151,30 @@
                 language: ''
             },
             id: '',
-            event: {},
             color: 'rgba(246, 246, 246, 1)'
         }),
+        computed: {
+            ...mapGetters(['storeCharact']),
+        },
         methods: {
-            ...mapActions(['getEvent', 'editEvent']),
+            ...mapActions(['getCharact', 'editCharact']),
             onSave() {
-                this.editEvent(this.event);
+                this.editCharact({id:this.id, charact:this.charact});
             }
         },
         watch: {
             $route: {
                 immediate: true,
                 handler() {
-                    this.id = this.$route.params.id;
-                    this.getEvent(+this.id).then(event => {
-                        this.event = {...this.charact, ...event};
-                    })
+                    if (JSON.stringify(this.storeCharact) === JSON.stringify(this.charact)){
+                        this.id = this.$route.params.id;
+                        this.getCharact(this.id).then(() => {
+                            this.charact= {...this.charact, ...this.storeCharact};
+                        })
+                    }
+                    else {
+                        this.charact = {...this.storeCharact}
+                    }
                 }
             }
         }

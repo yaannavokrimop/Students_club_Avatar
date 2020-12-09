@@ -7,13 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Data
-@ToString(exclude = {"preview", "participants"})
+@ToString(exclude = {"preview", "participants", "characteristic"})
 @NoArgsConstructor
 public class Event {
     @Id
@@ -51,8 +49,11 @@ public class Event {
 
     private String site;
 
-    /*@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Characteristic> characteristics;*/
+   /* @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventCharacteristic> characteristics;*/
+
+    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Characteristic characteristic;
 
     @OneToOne(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private Preview preview;

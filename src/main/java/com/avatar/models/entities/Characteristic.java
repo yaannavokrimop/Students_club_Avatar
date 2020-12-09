@@ -1,6 +1,5 @@
 package com.avatar.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,24 +8,22 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name="characteristics")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Characteristic {
     @Id
-    @GeneratedValue
-    @JsonIgnore
-    private UUID id;
+    private UUID eventId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="event_id")
+    @MapsId
+    @OneToOne
+    @JoinColumn(name = "event_id")
     private Event event;
 
-    private String name;
-
-    private String value;
-
-    private boolean required;
+    private int membersNumber;
+    private String periodicity;
+    private String category;
+    private String publicity;
+    private String format;
+    private String language;
 }
-

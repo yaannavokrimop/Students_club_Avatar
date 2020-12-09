@@ -98,6 +98,7 @@ const actions = {
         commit('CLEAR_PREVIEW');
         commit('CLEAR_NAME');
         commit('CLEAR_MEMBERS');
+        commit('CLEAR_CHARACT');
     }
 
 };
