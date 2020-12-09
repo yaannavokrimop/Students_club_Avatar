@@ -125,7 +125,7 @@
                 </template>
             </StyledCard>
         </v-col>
-        <v-col class="pa-0 mr-2" cols="4" v-if="showHelp">
+        <v-col class="pa-0 mr-3" cols="4" v-if="showHelp">
             <StyledCard closable :close="toggleHelp" :color="color">
                 <template #title>
                     Подсказки
@@ -149,7 +149,7 @@
                         <v-expansion-panel>
                             <v-expansion-panel-header :color="color">Краткое название</v-expansion-panel-header>
                             <v-expansion-panel-content>
-                              Краткое наименование не появляется на сайте,
+                              Краткое наименование не появляется на сайте ITMO.Students,
                               оно необходимо для лёгкого поиска в системе ИСУ.
                               Его видно в карточке мероприятия при поиске непосредственно в разделе «Мероприятия».
                               Здесь можно, например, сделать транслитерацию (запись кириллицей) названия латиницей или

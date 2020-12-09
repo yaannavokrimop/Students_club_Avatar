@@ -32,7 +32,10 @@
         props: {
             title: String,
             closable: Boolean,
-            close: Function,
+            close: {
+              type: Function,
+              default: () => 1,
+            },
             color: String
         },
         data: () => ({
@@ -41,7 +44,7 @@
             hasSubtitle(){
                 return !!this.$slots.subtitle
             },
-        },
+        }
     }
 </script>
 

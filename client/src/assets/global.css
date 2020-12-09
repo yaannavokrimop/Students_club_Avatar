@@ -30,6 +30,10 @@ button, input, select, textarea, .v-label, .v-input {
     border-color: rgb(246, 246, 246);
 }
 
+.v-expansion-panel-content__wrap {
+    padding-right: 40px;
+}
+
 .v-expansion-panel-content {
     font-size: 12px;
 }
