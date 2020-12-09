@@ -2,8 +2,10 @@ package com.avatar.services;
 
 import com.avatar.models.bean.SearchParam;
 import com.avatar.models.dto.EventDto;
+import com.avatar.models.dto.EventMainInfoDto;
 import com.avatar.models.entities.Event;
 import com.avatar.models.enums.EventStatus;
+import com.avatar.models.mappers.EventMainInfoMapper;
 import com.avatar.models.mappers.EventMapper;
 import com.avatar.repositories.EventRepo;
 import lombok.AllArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,33 +25,43 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EventService {
     private final EventRepo eventRepo;
+    private final DateService dateService;
 
-    public UUID create(EventDto eventDto) {
-        Event event = EventMapper.INSTANCE.EventDtoToEvent(eventDto);
-//        Event event = new Event();
+    public UUID create(EventDto eventDto) throws ParseException {
+        Date dateFrom = dateService.sumDateTime(eventDto.getDateFrom());
+        Date dateTo = dateService.sumDateTime(eventDto.getDateTo());
+        dateService.checkDate(dateFrom, dateTo);
+        Event event = new Event();
         event.setEventStatus(EventStatus.DRAFT);
-//        event.setName(eventDto.getName());
-//        event.setDateTimeStart(eventDto.getDateFrom());
-//        event.setDateTimeFinish(eventDto.getDateTo());
-//        event.setDateApproximate(eventDto.isDateFlag());
+        event.setName(eventDto.getName());
+        event.setDateTimeStart(dateFrom);
+        event.setDateTimeFinish(dateTo);
+        event.setDateApproximate(eventDto.isDateFlag());
         return eventRepo.save(event).getId();
     }
 
-    public EventDto getEventMainInfoById(UUID eventID) {
+    public EventMainInfoDto getEventMainInfoById(UUID eventID) {
         Event event = eventRepo.findById(eventID).orElseThrow(NullPointerException::new);
-        EventDto eventDto = EventMapper.INSTANCE.EventToEventDto(event);
+        String dateFrom = dateService.extractDate(event.getDateTimeStart());
+        String dateTo = dateService.extractDate(event.getDateTimeFinish());
+        String timeFrom = dateService.extractTime(event.getDateTimeStart());
+        String timeTo = dateService.extractTime(event.getDateTimeFinish());
+        EventMainInfoDto eventMainInfoDto = EventMainInfoMapper.INSTANCE.EventToEventMainInfoDto(event, dateFrom, dateTo, timeFrom, timeTo);
 //        EventDto eventDto = transformToEventDto(event);
 //        eventDto.setShortName(event.getShortName());
 //        eventDto.setStatus(event.getStatus());
 //        eventDto.setType(event.getType());
 //        eventDto.setTypeOfActivity(event.getActivityType());
-        return eventDto;
+        return eventMainInfoDto;
     }
 
-    public Event updateEventMainInfo(EventDto eventDto, UUID eventId) {
+    public Event updateEventMainInfo(EventMainInfoDto eventMainInfoDto, UUID eventId) throws ParseException {
         Event dbEvent = eventRepo.findById(eventId).orElseThrow(NullPointerException::new);
-        Event inputEvent = EventMapper.INSTANCE.EventDtoToEvent(eventDto);
-        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preview");
+        Date dateFrom = dateService.sumDateTime(eventMainInfoDto.getDateFrom(), eventMainInfoDto.getTimeFrom());
+        Date dateTo = dateService.sumDateTime(eventMainInfoDto.getDateTo(), eventMainInfoDto.getTimeTo());
+        dateService.checkDate(dateFrom, dateTo);
+        Event inputEvent = EventMainInfoMapper.INSTANCE.EventMainInfoDtoToEvent(eventMainInfoDto, dateFrom, dateTo);
+        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preview", "participants", "site");
         return eventRepo.save(dbEvent);
     }
 

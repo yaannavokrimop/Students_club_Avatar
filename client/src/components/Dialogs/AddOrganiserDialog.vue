@@ -39,7 +39,9 @@
                         <v-row class="px-5">
                             <v-col cols="3" class="pt-2"><span>Роль</span></v-col>
                             <v-col class="py-0">
-                                <v-textarea v-model="organiser.role" placeholder="Роль" rows="1" dense outlined></v-textarea>
+                                <v-autocomplete v-model="organiser.role"
+                                                :items="['Главный организатор', 'Организатор', 'Ответственный исполнитель']"
+                                                placeholder="Роль" dense outlined></v-autocomplete>
                             </v-col>
                         </v-row>
                         <v-row class="px-5">

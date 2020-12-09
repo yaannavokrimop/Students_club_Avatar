@@ -9,7 +9,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Краткое описание</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="storePreview.shortDescription" placeholder="Краткое описание" rows="1" dense
+                            <v-textarea v-model="preview.shortDescription" placeholder="Краткое описание" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
@@ -148,20 +148,22 @@
         methods: {
             ...mapActions(['getPreview', 'updatePreview']),
             onSave() {
-                this.updatePreview(this.id, this.preview);
+                this.updatePreview({id: this.id, preview: this.preview});
             }
         },
         watch: {
             $route: {
                 immediate: true,
                 handler() {
-                    this.id = this.$route.params.id;
-                    this.getPreview(this.id).then(() => {
-                        this.preview = {...this.preview, ...this.storePreview};
-                    })
-                    // this.getEvent(+this.id).then(event => {
-                    //     this.event = {...this.preview, ...event};
-                    // })
+                    if (JSON.stringify(this.storePreview) === JSON.stringify(this.preview)){
+                        this.id = this.$route.params.id;
+                        this.getPreview(this.id).then(() => {
+                            this.preview = {...this.preview, ...this.storePreview};
+                        })
+                    }
+                    else {
+                        this.preview = {...this.storePreview}
+                    }
                 }
             }
         }

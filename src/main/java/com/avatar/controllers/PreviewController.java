@@ -25,7 +25,7 @@ public class PreviewController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity changePreview(@PathVariable("id") UUID eventId, @RequestBody PreviewDto previewDto) {
         try {
             previewService.changePreview(eventId, previewDto);

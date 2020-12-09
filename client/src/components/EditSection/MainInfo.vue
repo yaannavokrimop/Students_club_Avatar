@@ -9,7 +9,7 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Название</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="storeMainInfo.name" placeholder="Название" rows="1" dense
+                            <v-textarea v-model="mainInfo.name" placeholder="Название" rows="1" dense
                                         outlined></v-textarea>
                         </v-col>
                     </v-row>
@@ -229,7 +229,7 @@
                 this.showHelp = !this.showHelp
             },
             onSave(){
-                // this.putMainInfo(this.id, this.mainInfo);
+                this.putMainInfo({id:this.id, mainInfo:this.mainInfo});
             }
         },
         watch: {
@@ -247,9 +247,6 @@
                     }
                 }
             },
-            /*storeMainInfo() {
-                this.mainInfo = {...this.storeMainInfo}
-            }*/
         }
     }
 </script>

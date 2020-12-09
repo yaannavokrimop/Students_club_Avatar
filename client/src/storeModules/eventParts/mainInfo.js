@@ -42,15 +42,19 @@ const actions = {
             .get('/event/mainInfo/' + id)
             .then((response) => {
                 commit("SET_MAININFO", response.data);
+                commit("SET_NAME", response.data.name);
                 //return (response.data);
             })
             .catch(error => console.error(error));
     },
 
-    putMainInfo({id, mainInfo}){
-        HTTP
-            .put('event/mainInfo/' + id, mainInfo)
-            .then(() => console.log('Main info saved successfully'))
+    putMainInfo( {commit },{id, mainInfo}){
+        return HTTP
+            .post('event/mainInfo/' + id, mainInfo)
+            .then(() => {
+                commit("SET_MAININFO", mainInfo);
+                console.log('Main info saved successfully')
+            })
             .catch(error => console.error(error))
     }
 };

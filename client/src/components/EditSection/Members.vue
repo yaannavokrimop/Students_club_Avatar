@@ -9,19 +9,19 @@
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Приглашаются к участию</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.invited" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="members.invited" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Контактное лицо</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.contact" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="members.contact" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
                         <v-col cols="4" class="pt-2"><span>Сторонние организаторы</span></v-col>
                         <v-col class="py-0">
-                            <v-textarea v-model="event.sideOrganizers" placeholder="Название" rows="2" dense outlined></v-textarea>
+                            <v-textarea v-model="members.sideOrganizers" placeholder="Название" rows="2" dense outlined></v-textarea>
                         </v-col>
                     </v-row>
                     <v-row class="px-5">
@@ -34,7 +34,7 @@
                         <v-col cols="12">
                            <v-data-table
                                    :headers="headers"
-                                   :items="event.organisers"
+                                   :items="members.organisers"
                                    :items-per-page="5"
                                    fixed-header
                                    hide-default-footer
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import { mapActions } from "vuex";
+    import { mapActions, mapGetters } from "vuex";
 
     import StyledCard from "../StyledCard";
     import AddOrganiserDialog from "../Dialogs/AddOrganiserDialog";
@@ -72,7 +72,6 @@
 
         data: () => ({
             id: '',
-            event: {},
             members: {
                 invited: '',
                 contact: '',
@@ -86,23 +85,31 @@
                 { text: 'Комментарий', value: 'comment', sortable: false }
             ],
         }),
+        computed: {
+            ...mapGetters(['storeMembers'])
+        },
         methods: {
-            ...mapActions(['getEvent', 'editEvent']),
+            ...mapActions(['getMembers', 'putMembers']),
             onSave() {
-                this.editEvent(this.event);
+                this.putMembers({id:this.id, members:this.members});
             },
             addOrganiser(organiser){
-                this.event.organisers.push({...organiser})
+                this.members.organisers.push({...organiser})
             }
         },
         watch: {
             $route: {
                 immediate: true,
                 handler() {
-                    this.id = this.$route.params.id;
-                    this.getEvent(+this.id).then(event => {
-                        this.event = {...this.members, ...event};
-                    })
+                    if (JSON.stringify(this.storeMembers) === JSON.stringify(this.members)){
+                        this.id = this.$route.params.id;
+                        this.getMembers(this.id).then(() => {
+                            this.members = {...this.members, ...this.storeMembers};
+                        })
+                    }
+                    else {
+                        this.members = {...this.storeMembers}
+                    }
                 }
             }
         }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/member")
+@RequestMapping("/api/members")
 @AllArgsConstructor
 public class ParticipantController {
     private final ParticipantService participantService;
@@ -18,17 +18,17 @@ public class ParticipantController {
     @GetMapping("/event/{id}")
     public ResponseEntity getParticipantInfo(@PathVariable("id")UUID eventId){
         try {
-            MemberDto memberDto = participantService.getParticipantInfo(eventId);
+            MemberDto memberDto = participantService.getMembersInfo(eventId);
             return ResponseEntity.ok(memberDto);
         } catch (NullPointerException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Мероприятие не найдено.");
         }
     }
 
-    @PutMapping("/event/{id}")
+    @PostMapping("/event/{id}")
     public ResponseEntity updateParticipantInfo(@PathVariable("id") UUID eventId, @RequestBody MemberDto memberDto) {
         try {
-            participantService.updateParticipantInfo(eventId, memberDto);
+            participantService.updateMembersInfo(eventId, memberDto);
             return ResponseEntity.ok("Данные сохранены успешно.");
         } catch (NullPointerException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Мероприятие не найдено.");

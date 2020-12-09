@@ -7,7 +7,7 @@
                         Редактирование
                     </template>
                     <template #subtitle>
-<!--                        {{event.name}}-->
+                        {{currentEventName}}
                     </template>
                     <template #card-text>
                         <v-list class="pt-0 pb-4" :color="color" dense>
@@ -56,7 +56,7 @@
             color: 'rgba(246, 246, 246, 1)'
         }),
         computed: {
-            ...mapGetters(['currentId'])
+            ...mapGetters(['currentEventName'])
         },
         methods: {
             // ...mapActions(['getEvent'])
