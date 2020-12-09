@@ -8,6 +8,14 @@ const state = {
         tasks: '',
         site: '',
         comment: ''
+    },
+    clearPreview: {
+        shortDescription: '',
+        description: '',
+        purpose: '',
+        tasks: '',
+        site: '',
+        comment: ''
     }
 };
 
@@ -17,6 +25,9 @@ const mutations = {
     },
     EDIT_PREVIEW(state, preview) {
         state.preview = {...state.preview, ...preview};
+    },
+    CLEAR_PREVIEW(state) {
+        state.preview = {...state.clearPreview};
     }
 };
 
@@ -30,11 +41,11 @@ const actions = {
             .catch(error => console.error(error));
     },
 
-    updatePreview({commit}, id, preview) {
-        commit("EDIT_PREVIEW", preview);
+    updatePreview({commit}, {id, preview}) {
         HTTP
-            .put('/preview/' + id, preview)
+            .post('/preview/' + id, preview)
             .then((response) => {
+                commit("EDIT_PREVIEW", preview);
                 console.log(response.data);
             })
             .catch(error => console.error(error));

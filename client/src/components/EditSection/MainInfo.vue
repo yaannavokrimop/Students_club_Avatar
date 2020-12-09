@@ -247,9 +247,6 @@
                     }
                 }
             },
-            /*storeMainInfo() {
-                this.mainInfo = {...this.storeMainInfo}
-            }*/
         }
     }
 </script>

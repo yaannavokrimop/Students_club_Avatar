@@ -42,17 +42,17 @@ const actions = {
             .get('/event/mainInfo/' + id)
             .then((response) => {
                 commit("SET_MAININFO", response.data);
+                commit("SET_NAME", response.data.name);
                 //return (response.data);
             })
             .catch(error => console.error(error));
     },
 
     putMainInfo( {commit },{id, mainInfo}){
-        console.log(mainInfo);
-        HTTP
+        return HTTP
             .post('event/mainInfo/' + id, mainInfo)
             .then(() => {
-                commit("SET_MAINIFO", mainInfo);
+                commit("SET_MAININFO", mainInfo);
                 console.log('Main info saved successfully')
             })
             .catch(error => console.error(error))

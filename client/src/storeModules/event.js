@@ -8,6 +8,7 @@ const state = {
         dateFlag: false,
     },
     id: '',
+    name: '',
     events: [],
     nextId: 0,
     currentId: 0,
@@ -34,8 +35,16 @@ const mutations = {
     SET_ID (state, id) {
         state.id = id;
     },
+    SET_NAME(state, name) {
+        state.name = name;
+    },
+
     SET_EVENTS(state, events) {
         state.events = events;
+    },
+
+    CLEAR_NAME(state) {
+        state.name = '';
     },
 
     // ADD_EVENT(state, event) {
@@ -77,10 +86,10 @@ const actions = {
         }).catch(error => console.log(error));
     },
 
-   /* createEvent({ commit }, event) {
-        commit('ADD_EVENT', event);
-        return state.currentId;
-    },*/
+        /* createEvent({ commit }, event) {
+         commit('ADD_EVENT', event);
+         return state.currentId;
+     },*/
 
     // getEvent(context, id){
     //     const index = state.events.findIndex(x => x.id === id);
@@ -98,7 +107,9 @@ const actions = {
     },
 
     clearEvent({ commit }){
-        commit('CLEAR_MAININFO')
+        commit('CLEAR_MAININFO');
+        commit('CLEAR_PREVIEW');
+        commit('CLEAR_NAME');
     }
 
 };
@@ -108,7 +119,7 @@ const getters = {
     events: state => state.events,
     currentId: state => state.currentId,
     eventShortEmpty: state => state.eventShortEmpty,
-    storeName: state => state.name,
+    currentEventName: state => state.name,
 
     buildings: state => state.buildings,
     rooms: state => state.rooms
