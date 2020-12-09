@@ -17,13 +17,20 @@ const mutations = {
 };
 
 const actions = {
-    showMessage({ commit }, message){
+    showMessage({commit}, {message, color}) {
         commit('SET_TEXT', message);
         commit('SET_VISIBLE', true)
+        commit('SET_COLOR', color)
     },
-    closeMessage({ commit }) {
+    closeMessage({commit}) {
         commit('SET_VISIBLE', false);
     },
+    showSuccess({dispatch}, message) {
+        dispatch('showMessage', { message, color: 'success' });
+    },
+    showError({dispatch}, message) {
+        dispatch('showMessage', { message: message.message, color: 'error'});
+    }
 };
 
 const getters = {

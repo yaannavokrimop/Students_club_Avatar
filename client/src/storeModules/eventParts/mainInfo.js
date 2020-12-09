@@ -54,9 +54,12 @@ const actions = {
             .then(() => {
                 commit("SET_MAININFO", mainInfo);
                 console.log('Main info saved successfully');
-                dispatch("showMessage", "Успешно сохранено")
+                dispatch("showSuccess", "Успешно сохранено");
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error);
+                dispatch("showError", error);
+            })
     }
 };
 

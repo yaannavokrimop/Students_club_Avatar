@@ -142,31 +142,60 @@
                                     турнир, благотворительная акция и т.д.
                                 </div>
                                 <div>
-                                    Для периодичсеких мероприятий не стоит указывать год/сезон/месяц.
+                                    Для периодичсеких мероприятий не стоит указывать год/сезон/месяц
                                 </div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
                             <v-expansion-panel-header :color="color">Краткое название</v-expansion-panel-header>
                             <v-expansion-panel-content>
-                                Примерные сроки используются, если нужно указать, что указанные даты проведения
-                                неокончательные и могут быть отредактрированы в дальнейшем
-                            </v-expansion-panel-content>
-                        </v-expansion-panel>
-                        <v-expansion-panel>
-                            <v-expansion-panel-header :color="color">Примерные сроки</v-expansion-panel-header>
-                            <v-expansion-panel-content>
-                                Примерные сроки используются, если нужно указать, что указанные даты проведения
-                                неокончательные и могут быть отредактрированы в дальнейшем
+                              Краткое наименование не появляется на сайте,
+                              оно необходимо для лёгкого поиска в системе ИСУ.
+                              Его видно в карточке мероприятия при поиске непосредственно в разделе «Мероприятия».
+                              Здесь можно, например, сделать транслитерацию (запись кириллицей) названия латиницей или
+                              добавить сокращенное название.
+                              Можно убрать весь статус мероприятия из полного названия и оставить только творческое именование.
+                              Для краткости можно не использовать кавычки в этом разделе.
+                              <br>
+                              Особенность: если мероприятие регулярное, то желательно в дальнейшем использовать одинаковое краткое наименование
+
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                         <v-expansion-panel>
                             <v-expansion-panel-header :color="color">Даты проведения</v-expansion-panel-header>
                             <v-expansion-panel-content>
-                                Примерные сроки используются, если нужно указать, что указанные даты проведения
-                                неокончательные и могут быть отредактрированы в дальнейшем
+                              Указывайте точные даты и время.
+                              Если есть особенности, скажем, после мероприятия возможны дополнительные встречи,
+                              или важно подчеркнуть, что окончание включает последнюю дату,
+                              или очень высока вероятность изменения дат, то укажите, что это примерные сроки
                             </v-expansion-panel-content>
                         </v-expansion-panel>
+                      <v-expansion-panel>
+                        <v-expansion-panel-header :color="color">Примерные сроки</v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          Примерные сроки используются, если нужно указать, что указанные даты проведения
+                          неокончательные и могут быть отредактрированы в дальнейшем
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                      <v-expansion-panel>
+                        <v-expansion-panel-header :color="color">Статус</v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          Зависит от уровня мероприятия, определяется по целевой аудитории
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                      <v-expansion-panel>
+                        <v-expansion-panel-header :color="color">Тип</v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          Выбирай наиболее подходящий для этого мероприятия из предложенного списка
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
+                      <v-expansion-panel>
+                        <v-expansion-panel-header :color="color">Вид деятельности</v-expansion-panel-header>
+                        <v-expansion-panel-content>
+                          Выбирай наиболее подходящий для этого мероприятия из предложенного списка.
+                          Все студенческие мероприятия являются частью внеучебной деятельности
+                        </v-expansion-panel-content>
+                      </v-expansion-panel>
                     </v-expansion-panels>
                 </template>
             </StyledCard>

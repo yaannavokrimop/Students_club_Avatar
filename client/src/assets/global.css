@@ -20,6 +20,10 @@ button, input, select, textarea, .v-label, .v-input {
     background-color: rgba(232, 234, 246, 1) !important;
 }
 
+.v-expansion-panel--active > .v-expansion-panel-header {
+    min-height: 0;
+}
+
 .v-expansion-panel-header, .v-expansion-panel-content {
     color: rgba(96, 96, 96, 1) !important;
     background-color: rgb(246, 246, 246);

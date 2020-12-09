@@ -1,23 +1,18 @@
 <template>
   <v-app>
-    <!--<div id="nav">
-      <storeModules-link to="/">Home</storeModules-link> |
-      <storeModules-link to="/about">About</storeModules-link>
-    </div>
-    <storeModules-view/>-->
 
     <SideBar/>
     <v-main class="main-style">
 
-      <v-snackbar app v-model="snackbar" top :color="msgColor">
-        <v-row class="pa-2">
-          <span v-html="msgText"></span>
-          <!--<v-btn :color="msgColor" dark depressed @click="snackbar = false">Закрыть</v-btn>-->
-          <v-spacer></v-spacer>
-          <v-btn @click="snackbar = false" icon fab x-small dark>
-            <v-icon>mdi-close</v-icon>
+      <v-snackbar v-model="snackbar" top app text :timeout="2000" :color="msgColor">
+        {{ msgText }}
+        <template v-slot:action="{ attrs }">
+          <v-btn @click="snackbar = false"
+                 icon fab x-small
+                 v-bind="attrs">
+            <v-icon :color="msgColor">mdi-close</v-icon>
           </v-btn>
-        </v-row>
+        </template>
       </v-snackbar>
 
       <router-view/>

@@ -78,12 +78,15 @@ const actions = {
             .catch(error => console.error(error))
     },
 
-    getEvents({commit}, ) {
+    getEvents({commit, dispatch}) {
         HTTP
             .get('/event/all')
             .then((response) => {
                 commit("SET_EVENTS", response.data);
-        }).catch(error => console.log(error));
+        }).catch(error => {
+            console.log(error);
+            dispatch("showError", error);
+        });
     },
 
         /* createEvent({ commit }, event) {

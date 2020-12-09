@@ -41,14 +41,18 @@ const actions = {
             .catch(error => console.error(error));
     },
 
-    updatePreview({commit}, {id, preview}) {
+    updatePreview({commit, dispatch}, {id, preview}) {
         HTTP
             .post('/preview/' + id, preview)
             .then((response) => {
                 commit("EDIT_PREVIEW", preview);
                 console.log(response.data);
+                dispatch("showSuccess", "Успешно сохранено");
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                dispatch("showError", error);
+            });
     }
 };
 

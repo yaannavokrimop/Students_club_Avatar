@@ -9,7 +9,7 @@
           <v-row class="px-8"><span class="span">Ваши заявки</span></v-row>
           <v-row class="px-5">
             <v-col cols="4">
-              <v-card @click="roomDialog = true" :color="cardColor" flat height="120">
+              <v-card @click="roomDialog = true" color="primary" flat height="120">
                 <v-card-title class="text-uppercase pb-2">Помещение</v-card-title>
                 <v-card-text>{{ roomRequest.building }} {{ roomRequest.room }}</v-card-text>
               </v-card>
@@ -24,17 +24,17 @@
           <v-row class="px-8"><span class="span">Возможно, вам так же понадобятся</span></v-row>
           <v-row class="px-5">
             <v-col cols="4">
-              <v-card :color="lightCardColor" flat height="120">
+              <v-card color="secondary" flat height="120">
                 <v-card-title class="text-uppercase addedCard pb-2">Волонтеры</v-card-title>
               </v-card>
             </v-col>
             <v-col cols="4">
-              <v-card :color="lightCardColor" flat height="120">
+              <v-card color="secondary" flat height="120">
                 <v-card-title class="text-uppercase addedCard pb-2">Оборудование</v-card-title>
               </v-card>
             </v-col>
             <v-col cols="4">
-              <v-card :color="lightCardColor" flat height="120">
+              <v-card color="secondary" flat height="120">
                 <v-card-title class="text-uppercase addedCard pb-2">Въезд на территорию университета</v-card-title>
               </v-card>
             </v-col>
@@ -99,8 +99,6 @@ export default {
       room: '',
       date: ''
     },
-    cardColor: '#7986CB',
-    lightCardColor: '#E8EAF6',
     color: 'rgba(246, 246, 246, 1)',
     event: {}
   }),
