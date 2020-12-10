@@ -53,6 +53,7 @@ const actions = {
             .post('event/mainInfo/' + id, mainInfo)
             .then(() => {
                 commit("SET_MAININFO", mainInfo);
+                commit("SET_NAME", mainInfo.name);
                 console.log('Main info saved successfully');
                 dispatch("showSuccess", "Успешно сохранено");
             })

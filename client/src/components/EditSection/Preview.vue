@@ -185,8 +185,8 @@
             $route: {
                 immediate: true,
                 handler() {
+                    this.id = this.$route.params.id;
                     if (JSON.stringify(this.storePreview) === JSON.stringify(this.preview)){
-                        this.id = this.$route.params.id;
                         this.getPreview(this.id).then(() => {
                             this.preview = {...this.preview, ...this.storePreview};
                         })

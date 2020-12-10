@@ -68,6 +68,7 @@ const actions = {
             .then((response) => {
                 console.log('Event created successfully');
                 commit("SET_ID", response.data);
+                commit("SET_NAME", event.name);
             })
             .catch(error => console.error(error))
     },

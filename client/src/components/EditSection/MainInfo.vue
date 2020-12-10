@@ -265,8 +265,8 @@
             $route: {
                 immediate: true,
                 handler() {
+                    this.id = this.$route.params.id;
                     if (JSON.stringify(this.storeMainInfo) === JSON.stringify(this.mainInfo)){
-                        this.id = this.$route.params.id;
                         this.getMainInfo(this.id).then(() => {
                             this.mainInfo = {...this.mainInfo, ...this.storeMainInfo};
                         })

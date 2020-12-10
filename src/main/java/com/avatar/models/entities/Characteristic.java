@@ -26,4 +26,9 @@ public class Characteristic {
     private String publicity;
     private String format;
     private String language;
+
+    public Characteristic(Event event) {
+        this.event = event;
+        this.eventId = event.getId();
+    }
 }

@@ -160,8 +160,8 @@
             $route: {
                 immediate: true,
                 handler() {
+                    this.id = this.$route.params.id;
                     if (JSON.stringify(this.storeCharact) === JSON.stringify(this.charact)){
-                        this.id = this.$route.params.id;
                         this.getCharact(this.id).then(() => {
                             this.charact= {...this.charact, ...this.storeCharact};
                         })

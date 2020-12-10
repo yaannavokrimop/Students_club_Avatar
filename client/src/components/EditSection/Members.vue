@@ -156,8 +156,8 @@
             $route: {
                 immediate: true,
                 handler() {
+                    this.id = this.$route.params.id;
                     if (JSON.stringify(this.storeMembers) === JSON.stringify(this.members)){
-                        this.id = this.$route.params.id;
                         this.getMembers(this.id).then(() => {
                             this.members = {...this.members, ...this.storeMembers};
                         })
