@@ -102,6 +102,8 @@ const actions = {
         commit('CLEAR_NAME');
         commit('CLEAR_MEMBERS');
         commit('CLEAR_CHARACT');
+        commit('CLEAR_LOCATIONS');
+        commit('CLEAR_LOCATION');
     }
 
 };

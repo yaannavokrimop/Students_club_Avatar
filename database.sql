@@ -82,6 +82,17 @@ create table avatar.Participants
 
 create table avatar.Address
 (
+    id uuid primary key,
+    event_id uuid references avatar.Event not null ,
+    address  varchar(255),
+    building varchar(255),
+    room     varchar(100),
+    dateFrom timestamp,
+    dateTo   timestamp
+);
+
+/*create table avatar.Address
+(
     id          uuid primary key,
     event_id    uuid references avatar.Event not null,
     name        varchar(255),
@@ -97,4 +108,4 @@ create table avatar.Address
     date_start  date,
     date_finish date,
     comment     varchar(255)
-);
+);*/

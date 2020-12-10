@@ -36,7 +36,7 @@ const actions = {
     },
 
     putMembers({commit}, {id, members}) {
-        return HTTP
+        HTTP
             .post('/members/event/' + id, members)
             .then(() => {
                 commit("SET_MEMBERS", members);

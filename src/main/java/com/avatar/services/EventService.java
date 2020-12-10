@@ -56,7 +56,7 @@ public class EventService {
         Date dateTo = dateService.sumDateTime(eventMainInfoDto.getDateTo(), eventMainInfoDto.getTimeTo());
         dateService.checkDate(dateFrom, dateTo);
         Event inputEvent = EventMainInfoMapper.INSTANCE.EventMainInfoDtoToEvent(eventMainInfoDto, dateFrom, dateTo);
-        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preview", "participants", "site");
+        BeanUtils.copyProperties(inputEvent, dbEvent, "id", "organiserId", "eventStatus", "characteristics", "preview", "participants", "site", "addresses");
         return eventRepo.save(dbEvent);
     }
 

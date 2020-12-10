@@ -49,7 +49,7 @@ const actions = {
     },
 
     putMainInfo( { commit, dispatch },{id, mainInfo}){
-        return HTTP
+        HTTP
             .post('event/mainInfo/' + id, mainInfo)
             .then(() => {
                 commit("SET_MAININFO", mainInfo);
@@ -64,7 +64,9 @@ const actions = {
 };
 
 const getters = {
-    storeMainInfo: state => state.mainInfo
+    storeMainInfo: state => state.mainInfo,
+    eventDateFrom: state => state.mainInfo.dateFrom,
+    eventDateTo: state => state.mainInfo.dateTo
 };
 
 export default {

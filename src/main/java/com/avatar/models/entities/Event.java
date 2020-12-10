@@ -11,7 +11,7 @@ import java.util.*;
 
 @Entity
 @Data
-@ToString(exclude = {"preview", "participants", "characteristic"})
+@ToString(exclude = {"preview", "participants", "characteristic", "addresses"})
 @NoArgsConstructor
 public class Event {
     @Id
@@ -60,6 +60,9 @@ public class Event {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Participant> participants;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses;
 
     public Event(String name, Date dateFrom, Date dateTo, boolean isDateApproximate) {
         this.name = name;
