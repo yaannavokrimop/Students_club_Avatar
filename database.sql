@@ -3,7 +3,7 @@ CREATE SCHEMA avatar AUTHORIZATION postgres;
 create table avatar.Event
 (
     id                  uuid primary key,
-    organiser_id        integer      not null,
+    organiser_id        integer      not null, //айди клуба
     name                varchar(255) not null,
     short_name          varchar(255),
     type                varchar(255),
@@ -109,3 +109,16 @@ create table avatar.Address
     date_finish date,
     comment     varchar(255)
 );*/
+
+create table avatar.Claim_Transport (
+    id UUID primary key ,
+    organiser varchar(100),
+    contact_info varchar(255),
+    aim varchar(255),
+    car varchar(255),
+    cargo_type varchar(50),
+    date date,
+    time_start time,
+    time_finish time,
+    route text
+);

@@ -20,7 +20,7 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping("/all/{id}")
-    public ResponseEntity getAddresses (@PathVariable("id") UUID eventId) {
+    public ResponseEntity getAddresses(@PathVariable("id") UUID eventId) {
         try {
             List<AddressDto> addresses = addressService.getAddresses(eventId);
             return ResponseEntity.ok(addresses);
